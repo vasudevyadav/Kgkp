@@ -1,36 +1,10 @@
 import React, { useState, useEffect } from 'react';
-import CommonImage from "@/assets/images/Floor-Plan.png";
 
-const floorPlans = [
-  {
-    title: '5 BHK',
-    size: '5327 sq.ft.',
-    description: 'Specification:\nLorem ipsum dolor sit amet, adipiscing elit. Vestibulum non rhoncus magna.',
-    image: CommonImage,
-  },
-  {
-    title: '4 BHK (TYPE 1)',
-    size: '4171 sq.ft.',
-    description: 'Specification:\nLorem ipsum dolor sit amet, adipiscing elit. Vestibulum non rhoncus magna.',
-    image: CommonImage,
-  },
-  {
-    title: '4 BHK (TYPE 2)',
-    size: '4171 sq.ft.',
-    description: 'Specification:\nLorem ipsum dolor sit amet, adipiscing elit. Vestibulum non rhoncus magna.',
-    image: CommonImage,
-  },
-  {
-    title: '4 BHK (TYPE 3)',
-    size: '4171 sq.ft.',
-    description: 'Specification:\nLorem ipsum dolor sit amet, adipiscing elit. Vestibulum non rhoncus magna.',
-    image: CommonImage,
-  },
-];
-
-const FloorPlan = () => {
+const FloorPlan = ({ data }) => {
   const [zoomImage, setZoomImage] = useState(null);
   const [activeTab, setActiveTab] = useState('unit');
+
+  const floorPlans = data?.plans || [];
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -71,63 +45,60 @@ const FloorPlan = () => {
   return (
     <section className="w-full lg:py-14 py-8 bg-white">
       <div className="mx-auto">
-
         <div className="text-center mb-20">
           <p className="text-amber-700 uppercase text-sm tracking-widest mb-6 bg-white inline-block px-10 py-2">
-            Lorem ipsum dolor sit amet
+            {data?.tagline || 'Lorem ipsum dolor sit amet'}
           </p>
 
           <div className="bg-[#e8e8e8] w-full h-[2px] rounded-full mb-10 relative">
             <p className="text-2xl lg:text-4xl font-light text-gray-800 absolute -top-6 left-1/2 -translate-x-1/2 bg-white lg:px-10 px-6 py-2">
-              Floor Plan
+              {data?.title || 'Floor Plan'}
             </p>
           </div>
-
         </div>
 
-<div className='lg:px-10 px-6'>
-        <div className="flex justify-center gap-4 mb-12">
-          <button
-            onClick={() => setActiveTab('master')}
-            className={`border px-8 py-3 text-sm ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
-          >
-            MASTER PLAN
-          </button>
-          <button
-            onClick={() => setActiveTab('unit')}
-            className={`border px-8 py-3 text-sm ${activeTab === 'unit' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
-          >
-            UNIT PLAN
-          </button>
-        </div>
-
-        {renderFloorCards()}
-
-        {zoomImage && (
-          <div
-            className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center"
-            onClick={() => setZoomImage(null)} // Close on outside click
-          >
-            <div
-              className="relative bg-white p-4 rounded-lg max-w-6xl w-[90%] max-h-[700px] overflow-auto shadow-lg"
-              onClick={(e) => e.stopPropagation()} // Prevent modal from closing on inside click
+        <div className='lg:px-10 px-6'>
+          <div className="flex justify-center gap-4 mb-12">
+            <button
+              onClick={() => setActiveTab('master')}
+              className={`border px-8 py-3 text-sm ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
             >
-              <button
-                onClick={() => setZoomImage(null)}
-                className="absolute top-2 right-2 bg-black w-10 h-10 rounded-full flex justify-center text-white items-center text-4xl font-bold hover:text-red-600"
-              >
-                ×
-              </button>
-              <img
-                src={zoomImage}
-                alt="Zoomed Floor Plan"
-                className="w-full h-[700px] object-contain p-4"
-              />
-            </div>
+              MASTER PLAN
+            </button>
+            <button
+              onClick={() => setActiveTab('unit')}
+              className={`border px-8 py-3 text-sm ${activeTab === 'unit' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
+            >
+              UNIT PLAN
+            </button>
           </div>
-        )}
-</div>
 
+          {renderFloorCards()}
+
+          {zoomImage && (
+            <div
+              className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center"
+              onClick={() => setZoomImage(null)}
+            >
+              <div
+                className="relative bg-white p-4 rounded-lg max-w-6xl w-[90%] max-h-[700px] overflow-auto shadow-lg"
+                onClick={(e) => e.stopPropagation()}
+              >
+                <button
+                  onClick={() => setZoomImage(null)}
+                  className="absolute top-2 right-2 bg-black w-10 h-10 rounded-full flex justify-center text-white items-center text-4xl font-bold hover:text-red-600"
+                >
+                  ×
+                </button>
+                <img
+                  src={zoomImage}
+                  alt="Zoomed Floor Plan"
+                  className="w-full h-[700px] object-contain p-4"
+                />
+              </div>
+            </div>
+          )}
+        </div>
       </div>
     </section>
   );

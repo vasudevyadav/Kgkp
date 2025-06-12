@@ -71,7 +71,7 @@ const ProjectHeading = () => {
         {/* Project showcase */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-6 lg:mb-1 items-center">
           {/* Left side image */}
-          <div className="rounded-2xl overflow-hidden shadow-sm bg-white border border-gray-100">
+          <div className="rounded-2xl overflow-hidden bg-white border border-gray-100">
             <img
               src={projectHead}
               alt="Project Location Map"

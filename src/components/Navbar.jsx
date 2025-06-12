@@ -1,17 +1,18 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import logo from '@/assets/images/logo.webp';
 import { Menu, X, ChevronDown } from 'lucide-react';
 
 const Navbar = () => {
+  const location = useLocation();
+
   const [scrolled, setScrolled] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [projectOpen, setProjectOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('');
 
-  // Menu data with URLs
   const mainMenu = [
-    { id: 'about', label: 'About', url: '#about' },
+    { id: 'about', label: 'About', url: '/kgk-test/about-us' },
     {
       id: 'project',
       label: 'PROJECTS',
@@ -25,9 +26,23 @@ const Navbar = () => {
   ];
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 50);
-    window.addEventListener('scroll', onScroll);
+    const onScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
 
+    // Initial check
+    onScroll();
+
+    window.addEventListener('scroll', onScroll);
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
+
+  useEffect(() => {
+    // Re-check scroll position on route change
+    setScrolled(window.scrollY > 50);
+  }, [location.pathname]);
+
+  useEffect(() => {
     const sectionIds = ['about', 'residential', 'commercial', 'luxury', 'connect'];
     const observers = [];
 
@@ -48,7 +63,6 @@ const Navbar = () => {
     });
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
       observers.forEach((observer) => observer.disconnect());
     };
   }, []);
@@ -74,6 +88,7 @@ const Navbar = () => {
           />
         </Link>
 
+        {/* Desktop Menu */}
         <div className="hidden md:flex items-center gap-16 relative">
           <nav className="flex items-center space-x-10 text-white font-medium uppercase text-lg tracking-wider relative">
             {mainMenu.map((item) =>
@@ -116,7 +131,7 @@ const Navbar = () => {
           </button>
         </div>
 
-        {/* Mobile Toggle Button */}
+        {/* Mobile Menu Button */}
         <div className="md:hidden">
           <button
             onClick={() => setIsOpen(!isOpen)}
@@ -128,7 +143,7 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Mobile Overlay */}
       <div
         className={`fixed inset-0 top-20 bg-black bg-opacity-50 transition-opacity duration-300 ${isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
           }`}

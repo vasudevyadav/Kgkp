@@ -1,0 +1,70 @@
+{
+  "ModernFacilitiesSection": {
+    "slider": [
+      {
+        "image": "/images/facility1.jpg",
+        "label": "Gymnasium",
+        "iconUrl": "/icons/gym-icon.png"
+      },
+      {
+        "image": "/images/facility2.jpg",
+        "label": "Swimming Pool",
+        "iconUrl": "/icons/pool-icon.png"
+      },
+      {
+        "image": "/images/facility3.jpg",
+        "label": "Clubhouse",
+        "iconUrl": "/icons/club-icon.png"
+      },
+      {
+        "image": "/images/facility4.jpg",
+        "label": "Kids Play Area",
+        "iconUrl": "/icons/kids-icon.png"
+      }
+    ],
+    "video": {
+      "thumbnail": "/images/facility-video-thumbnail.jpg",
+      "url": "https://example.com/videos/facility-tour.mp4"
+    }
+  },
+  {
+  fullUrl: "https://example.com/full.jpg",
+  thumbUrl: "https://example.com/thumb.jpg"
+}
+}
+
+
+
+
+{
+  FloorPlanSection: {
+    title: "Floor Plan",
+    tagline: "Lorem ipsum dolor sit amet",
+    plans: [
+      {
+        title: "5 BHK",
+        size: "5327 sq.ft.",
+        description: "Specification:\nLorem ipsum dolor sit amet, adipiscing elit.",
+        image: "https://example.com/images/5bhk.png"
+      },
+      {
+        title: "4 BHK (TYPE 1)",
+        size: "4171 sq.ft.",
+        description: "Specification:\nLorem ipsum dolor sit amet, adipiscing elit.",
+        image: "https://example.com/images/4bhk1.png"
+      },
+      // more...
+    ]
+  }
+  
+}
+
+
+book visit site : {
+  "name": "John",
+  "email": "john@example.com",
+  "contact": "9876543210",
+  "date": "2025-06-14",
+  "slug": "aarohan-jaipur",
+  "projectName": "Aarohan Jaipur"
+} ye  aayega post api me

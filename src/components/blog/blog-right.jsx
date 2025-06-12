@@ -1,57 +1,56 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Calendar, Search } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import blogimage from '@/assets/images/cat-1.jpg';
-
-const blogData = [
-  {
-    id: 1,
-    title: 'Affordable Flats in Jaipur – A Smart Investment for the Future',
-    date: 'September 21, 2024',
-    image: blogimage,
-    link: '/blog/affordable-flats-in-jaipur',
-  },
-  {
-    id: 2,
-    title: 'Ultra Luxury 5 BHK Flats in Jaipur | KGK Realty',
-    date: 'September 21, 2024',
-    image: blogimage,
-    link: '/blog/top-tips-to-buy-your-dream-home',
-  },
-  {
-    id: 3,
-    title: 'Top Locations to Invest in Jaipur',
-    date: 'September 21, 2024',
-    image: blogimage,
-    link: '/blog/top-locations-jaipur',
-  },
-  {
-    id: 4,
-    title: 'Smart Apartments in Mansarovar',
-    date: 'September 21, 2024',
-    image: blogimage,
-    link: '/blog/smart-apartments-mansarovar',
-  },
-];
-
-const tags = [
-  'Residential',
-  'Flats',
-  'Industrial',
-  'Commercial',
-  'Real Estate',
-  'Apartments',
-];
+import axios from 'axios';
 
 const BlogRight = () => {
   const [searchTerm, setSearchTerm] = useState('');
+  const [popularPosts, setPopularPosts] = useState([]);
+  const [tags, setTags] = useState([]);
 
-  const filteredBlogs = blogData.filter((blog) =>
-    blog.title.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
+  const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
+
+  useEffect(() => {
+    // Fetch Tags
+    axios
+      .get(`${API_BASE_URL}/tags`)
+      .then((res) => {
+        if (Array.isArray(res.data)) {
+          setTags(res.data);
+        } else if (Array.isArray(res.data?.data)) {
+          setTags(res.data.data);
+        } else {
+          console.warn('Unexpected tags format:', res.data);
+        }
+      })
+      .catch((err) => console.error('Error fetching tags:', err));
+
+    // Fetch Popular Posts
+    axios
+      .get(`${API_BASE_URL}/popular-posts`)
+      .then((res) => {
+        const data = res.data;
+        if (Array.isArray(data)) {
+          setPopularPosts(data);
+        } else if (Array.isArray(data?.popularPosts)) {
+          setPopularPosts(data.popularPosts);
+        } else {
+          console.warn('Unexpected popular posts format:', data);
+        }
+      })
+      .catch((err) => console.error('Error fetching popular posts:', err));
+  }, [API_BASE_URL]);
+
+  const filteredPosts = Array.isArray(popularPosts)
+    ? popularPosts.filter((post) =>
+        post.title?.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
   return (
     <aside className="w-full">
+      {/* Search Input */}
       <div className="relative mb-10">
         <input
           type="text"
@@ -64,32 +63,43 @@ const BlogRight = () => {
           <Search size={18} />
         </button>
       </div>
-      <div className=" mb-10">
+
+      {/* Tags Section */}
+      <div className="mb-10">
         <h3 className="text-2xl font-semibold text-black mb-6">Tags</h3>
         <div className="flex flex-wrap gap-2">
-          {tags.map((tag, i) => (
-            <button
-              key={i}
-              className="border border-gray-300 px-4 py-1.5 text-sm rounded text-gray-800 hover:bg-gray-100"
-            >
-              {tag}
-            </button>
-          ))}
+          {tags.length > 0 ? (
+            tags.map((tag) => (
+              <button
+                key={tag.id}
+                className="border border-gray-300 px-4 py-1.5 text-sm rounded text-gray-800 hover:bg-gray-100"
+              >
+                {tag.name}
+              </button>
+            ))
+          ) : (
+            <p className="text-sm text-gray-500">No tags found.</p>
+          )}
         </div>
       </div>
 
-      <div className=" mb-10">
+      {/* Popular Posts Section */}
+      <div className="mb-10">
         <h3 className="text-2xl font-semibold text-black mb-6">Popular Posts</h3>
         <div className="space-y-4">
-          {filteredBlogs.length > 0 ? (
-            filteredBlogs.map((post) => (
+          {filteredPosts.length > 0 ? (
+            filteredPosts.map((post) => (
               <Link
-                to={post.link}
+                to={`/blog/${post.slug}`}
                 key={post.id}
-                className="flex items-start gap-4"
+                className="flex items-center gap-4"
               >
                 <img
-                  src={post.image}
+                  src={
+                    post.image?.startsWith('http')
+                      ? post.image
+                      : `${IMAGE_BASE_URL}${post.image}`
+                  }
                   alt={post.title}
                   className="w-24 h-16 object-cover rounded-sm"
                 />

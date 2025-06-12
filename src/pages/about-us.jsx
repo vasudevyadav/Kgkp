@@ -1,8 +1,9 @@
 import React, { useEffect } from "react";
 import MainLayout from '@/layout/MainLayout';
 import HeroSection from "@/components/common/HeroSection";
-import OfficeAddress from "../components/contact-us/office-address";
 import AboutInfo from "../components/about-us/about-us";
+import AboutLeadership from "../components/about-us/about-leadership";
+import AboutJourney from "../components/about-us/about-journey";
 
 const AboutUs = () => {
 
@@ -22,7 +23,8 @@ const AboutUs = () => {
     <MainLayout title=" About Us ">
       <HeroSection title=" About Us " />
       <AboutInfo />
-      <OfficeAddress />
+      <AboutLeadership />
+      <AboutJourney />
     </MainLayout>
   );
 };

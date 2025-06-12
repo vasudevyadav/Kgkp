@@ -82,7 +82,7 @@ const ContactForm = () => {
   };
 
   return (
-    <section className="w-full container-fluid py-7 lg:py-12 bg-white">
+    <section className="w-full container-fluid py-7 lg:py-20 bg-white">
       <div className="max-w-7xl mx-auto flex flex-col md:flex-row gap-12 items-start">
         {/* Left (Form) */}
         <div className="w-full md:w-2/3">

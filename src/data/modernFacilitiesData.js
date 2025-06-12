@@ -1,39 +1,27 @@
-// src/data/modernFacilitiesData.js
-
-import { FaDumbbell, FaChild, FaTheaterMasks, FaGlassCheers } from "react-icons/fa";
-
-import GymImage from "@/assets/images/proj1.jpg";
-import KidsRoom from "@/assets/images/proj2.jpg";
-import Theatre from "@/assets/images/proj3.jpg";
-import Banquet from "@/assets/images/proj1.jpg";
-import VideoThumbnail from "@/assets/images/proj1.jpg"; // Add a static thumbnail
-
-const sliderData = [
+const mockProjects = [
   {
-    image: GymImage,
-    label: "GYMNASIUM",
-    icon: FaDumbbell,
+    slug: "oasis",
+    title: "Oasis",
+    ModernFacilitiesSection: {
+      slider: [
+        {
+          image: "https://example.com/pool.jpg",
+          label: "Swimming Pool",
+          iconUrl: "https://example.com/icons/pool.svg",
+        },
+        {
+          image: "https://example.com/gym.jpg",
+          label: "Gym",
+          iconUrl: "https://example.com/icons/gym.svg",
+        },
+      ],
+      video: {
+        thumbnail: "https://example.com/video-thumb.jpg",
+        url: "https://example.com/video.mp4",
+      },
+    },
   },
-  {
-    image: KidsRoom,
-    label: "KIDS ACTIVITY",
-    icon: FaChild,
-  },
-  {
-    image: Theatre,
-    label: "MINI THEATRE",
-    icon: FaTheaterMasks,
-  },
-  {
-    image: Banquet,
-    label: "BANQUET",
-    icon: FaGlassCheers,
-  },
+  // other projects...
 ];
 
-const videoData = {
-  thumbnail: VideoThumbnail,
-  url: "https://www.w3schools.com/html/mov_bbb.mp4",
-};
-
-export { sliderData, videoData };
+export default mockProjects;

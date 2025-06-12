@@ -184,18 +184,17 @@ const fetchProjects = async () => {
 
   return (
     <section className="lg:py-16 py-10 bg-[#F1F1F1]">
-      <div className="container-fluid pr-0 mb-4">
+      
+      <div className="container-fluid !pr-0 mb-6">
+         <p className="text-primary uppercase text-sm tracking-[2px] mr-4 mb-3">{subheading}</p>
         <div className="flex items-center mb-2">
-          <p className="text-primary uppercase text-sm tracking-[2px] mr-4">{subheading}</p>
+                  <h2 className="text-2xl lg:text-4xl text-dark mr-4">{heading}</h2>
           <div className="h-px bg-customGray1 flex-1"></div>
         </div>
       </div>
 
       <div className="container-fluid">
-        <h2 className="text-2xl lg:text-4xl text-dark mb-8">{heading}</h2>
-
-        {/* Filter UI */}
-        <div className="lg:flex bg-white my-3 items-center">
+        <div className="lg:flex bg-white my-5 items-center">
           <div className="flex-1 min-w-0">{renderDropdown(filters.residential || 'RESIDENTIAL', residentialOptions, 'residential')}</div>
           <div className="flex-1 min-w-0">{renderDropdown(filters.location || 'LOCATION', locationOptions, 'location')}</div>
           <div className="flex-1 min-w-0">{renderDropdown(filters.propertyType || 'PROPERTY TYPE', propertyTypeOptions, 'propertyType')}</div>
@@ -225,7 +224,7 @@ const fetchProjects = async () => {
                       <img
                         src={proj.logo}
                         alt="Project Logo"
-                        className="absolute top-4 left-4 w-12 h-12 rounded-full bg-white p-1"
+                        className="absolute top-4 left-4 w-24 h-24 rounded-full bg-white p-1 object-contain"
                       />
                     )}
                   </div>

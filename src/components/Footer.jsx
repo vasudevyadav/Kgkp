@@ -10,7 +10,7 @@ import {
   FiTwitter,
   FiInstagram,
   FiLinkedin,
-  FiYoutube
+  FiYoutube,
 } from 'react-icons/fi';
 
 import { Link } from 'react-router-dom';
@@ -54,17 +54,23 @@ const Footer = () => {
   const quickLinks = [
     { label: 'HOME', path: '/' },
     { label: 'PRIVACY POLICY', path: '/privacy-policy' },
-    { label: 'ABOUT KGK GROUP', path: '/about-kgk-group' },
+    { label: 'ABOUT KGK GROUP', path: '/about-us' },
     { label: 'MEDIA - IN THE PRESS', path: '/media' },
-    { label: 'PROJECTS', path: '/projects' },
+    { label: 'PROJECTS', path: '/project' },
     { label: 'PARTNERS IN GROWTH', path: '/partners' },
     { label: 'CAREERS', path: '/careers' },
     { label: 'BLOGS', path: '/blog' },
-    { label: 'CONTACT', path: '/contact' },
+    { label: 'CONTACT', path: '/contact-us' },
     { label: 'LAURELS', path: '/laurels' },
   ];
 
-  const socialIcons = [FiFacebook, FiTwitter, FiInstagram, FiLinkedin, FiYoutube];
+  const socialIcons = [
+    { icon: FiFacebook, url: 'https://www.facebook.com/kgkrealty' },
+    { icon: FiTwitter, url: 'https://twitter.com/kgkrealty' },
+    { icon: FiInstagram, url: 'https://www.instagram.com/kgkrealty' },
+    { icon: FiLinkedin, url: 'https://www.linkedin.com/company/kgkrealty' },
+    { icon: FiYoutube, url: 'https://www.youtube.com/@kgkrealty' },
+  ];
 
   return (
     <footer className="bg-[#77787a] text-white text-xs">
@@ -75,13 +81,16 @@ const Footer = () => {
         </div>
         <div>
           <div className="flex gap-3 lg:justify-end">
-            {socialIcons.map((Icon, index) => (
-              <div
+            {socialIcons.map(({ icon: Icon, url }, index) => (
+              <a
                 key={index}
-                className="w-8 h-8 rounded-full border border-white text-white flex items-center justify-center"
+                href={url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-8 h-8 rounded-full border border-white text-white flex items-center justify-center hover:bg-white hover:text-[#77787a] transition-colors duration-200"
               >
                 <Icon className="text-base" />
-              </div>
+              </a>
             ))}
           </div>
         </div>
@@ -95,15 +104,15 @@ const Footer = () => {
             <ContactRow icon={<FaPhoneAlt className="text-xs" />} center>
               <div>
                 {phone.map((num, i) => (
-                  <p className='text-xs' key={i}>{num}</p>
+                  <p className="text-xs" key={i}>{num}</p>
                 ))}
               </div>
             </ContactRow>
             <ContactRow icon={<FaEnvelope className="text-xs" />} center>
-              <p className='text-xs'>{email}</p>
+              <p className="text-xs">{email}</p>
             </ContactRow>
             <ContactRow icon={<FaMapMarkerAlt className="text-xs" />}>
-              <p className='text-xs'>{address}</p>
+              <p className="text-xs">{address}</p>
             </ContactRow>
           </div>
         ))}
@@ -127,7 +136,9 @@ const Footer = () => {
 
       {/* Bottom Copyright */}
       <div className="text-center text-xs bg-[#a5a5a5] py-4">
-        © 2024 KGK REALTY, ALL RIGHTS RESERVED
+         © 2024
+        <a href=''>  KGK REALTY, </a>
+       ALL RIGHTS RESERVED
       </div>
     </footer>
   );

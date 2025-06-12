@@ -17,14 +17,14 @@ const slides = [
 ];
 
 const features = [
-  { icon: <Umbrella size={48} />, strong: "PARTNERSHIP", description: "Built on strong values and lasting relationships, we treat every industrial project as our own, ensuring trust and a personalized approach at every stage.", },
-  { icon: <Users size={48} />, strong: "EXPERTISE", description: "With decades of specialized industry experience, we deliver meticulous planning, strategic execution, and dependable completion to maximize the potential of your industrial assets.", },
-  { icon: <Settings size={48} />, strong: "INNOVATION", description: "We go beyond construction by integrating cutting-edge technology and progressive design principles, creating industrial spaces that meet the evolving demands of modern businesses.", },
+  { icon: <Umbrella size={40} />, strong: "PARTNERSHIP", description: "Built on strong values and lasting relationships, we treat every industrial project as our own, ensuring trust and a personalized approach at every stage.", },
+  { icon: <Users size={40} />, strong: "EXPERTISE", description: "With decades of specialized industry experience, we deliver meticulous planning, strategic execution, and dependable completion to maximize the potential of your industrial assets.", },
+  { icon: <Settings size={40} />, strong: "INNOVATION", description: "We go beyond construction by integrating cutting-edge technology and progressive design principles, creating industrial spaces that meet the evolving demands of modern businesses.", },
 ];
 
 const WhyChosesUs = () => (
   <section className="bg-[#A36A2B] text-white py-10 px-6 ">
-    <div className="text-center mx-auto max-w-3xl">
+    <div className="text-center mx-auto max-w-3xl"> 
       <h2 className="text-2xl lg:text-4xl font-light leading-tight mb-2"> Why Choose KGK Realty? </h2>
       <p className="text-[16px] font-normal leading-relaxed max-w-3xl mx-auto">
         At KGK Realty, we place your industrial investment at the forefront, offering expert insights and customized solutions tailored to your business needs.
@@ -61,11 +61,11 @@ const WhyChosesUs = () => (
       <div className="mt-10 grid grid-cols-1 md:grid-cols-3 gap-12 text-center mb-2">
         {features.map((feature, i) => (
           <div key={i} className="flex flex-col items-center px-4">
-            <div className="mb-4">{feature.icon}</div>
-            <h3 className="text-[20px] font-light leading-snug text-black">
+            <div className="mb-6">{feature.icon}</div>
+            <h3 className="text-[25px] font-light leading-snug text-black">
               THE POWER OF <span className="font-bold">{feature.strong}</span>
             </h3>
-            <p className="mt-2 text-sm font-normal leading-relaxed max-w-[280px]">
+            <p className="mt-2 text-sm font-normal leading-relaxed">
               {feature.description}
             </p>
           </div>

@@ -51,9 +51,9 @@ const CategorySlider = () => {
   const [hoverIndex, setHoverIndex] = useState(null);
 
   return (
-    <section className="lg:py-12 lg:pt-24 py-6 bg-white relative overflow-visible">
-      <div className="mx-auto px-4 lg:px-0 lg:pl-12 flex flex-col lg:flex-row justify-stretch gap-10">
-        <div className="w-full lg:w-2/3 overflow-visible relative">
+    <section className="lg:py-12 lg:pt-24 pt-28 py-6 bg-white relative overflow-visible">
+      <div className="mx-auto px-4 lg:px-0 lg:pl-12 flex flex-col lg:flex-row justify-stretch gap-4">
+        <div className="w-full lg:w-2/3 overflow-visible relative lg:order-1 order-2">
           <div className="overflow-visible pt-4 lg:pl-16">
             {/* Desktop View */}
             <div className="hidden md:flex gap-3 justify-center items-end">
@@ -63,7 +63,7 @@ const CategorySlider = () => {
                 let widthClass, heightClass, marginClass, zIndexClass;
 
                 if (isActive) {
-                  widthClass = 'w-[40%]';
+                  widthClass = 'w-[36%]';
                   heightClass = 'h-[22.5rem]';
                   marginClass = '-mt-16';
                   zIndexClass = 'z-30';
@@ -213,7 +213,7 @@ const CategorySlider = () => {
         </div>
 
         {/* Right Text Block */}
-        <div className="lg:w-1/3 flex items-center">
+        <div className="lg:w-1/3 flex items-center lg:order-2 order-1 ">
           <div className="flex items-center border-t-2 hidden lg:block border-gray-300 text-gray-800 lg:text-4xl text-2xl pt-8 transition-all duration-300 ease-out">
             Crafting quality <br /> spaces with <br /> innovation since <br /> 13+ Years
           </div>

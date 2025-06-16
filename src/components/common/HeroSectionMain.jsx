@@ -25,8 +25,8 @@ const HeroSectionMain = ({ title, background, breadcrumbs }) => {
     >
       <div className="absolute inset-0 bg-black/50" />
       
-      <div className="relative z-10 text-center text-white px-4 py-6">
-        <h1 className="text-2xl lg:text-4xl font-normal mb-2 drop-shadow-lg">{title}</h1>
+      <div className="relative z-10 text-center text-white px-4 pt-16 lg:pt-6 py-6">
+        <h1 className="text-2xl lg:text-5xl font-normal mb-2 drop-shadow-lg">{title}</h1>
         <nav className="text-sm lg:text-lg flex justify-center flex-wrap gap-2 drop-shadow">
           {crumbs.map((crumb, i) => {
             const label =

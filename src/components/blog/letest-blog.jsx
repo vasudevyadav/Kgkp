@@ -55,13 +55,20 @@ const LetestBlog = () => {
               className="w-full h-64 object-cover"
             />
             <div className="py-8 px-3 text-center">
+                <Link
+                          to={`/blog/${blog.slug}`}
+                        >
               <h2 className="text-xl md:text-2xl font-bold text-gray-900 mb-6 leading-tight line-clamp-2">
                 {blog.title}
               </h2>
+              </Link>
+
               <div className="h-[1px] bg-[#c1c1c1] w-full mb-6" />
               <p className="text-gray-700 text-base leading-6 mb-4 line-clamp-3">
-                {blog.description1}
+                {/* {blog.description} */}
+                Most people think that Jaipur is only about heritage, forts, and tourism. But in the last decade, things have changed at a rapid pace
               </p>
+              
               <div className="flex justify-center items-center gap-6 text-sm text-gray-500 mb-8">
                 <div className="flex items-center gap-1 text-black">
                   <User size={14} />

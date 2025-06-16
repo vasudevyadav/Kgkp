@@ -8,7 +8,7 @@ const FloatingActionButton = () => {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="absolute bottom-[10%] right-6 z-50 flex flex-col items-center">
+    <div className="lg:absolute lg:bottom-[10%] fixed bottom-2 right-6 z-10 flex flex-col items-center">
       {/* Action Buttons */}
       <div
         className={`transition-all duration-300 ease-in-out bg-black/80 backdrop-blur-md rounded-full pt-4 pb-8 px-2 relative -z-[1] -bottom-[22px] flex flex-col items-center gap-5 ${

@@ -13,29 +13,13 @@ const AboutLeadership = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const leaders = [
-    {
-      name: "Navrattan Kothari",
-      title: "Patriarch",
-      description1:
-        "Since 1962, Mr. Navrattan Kothari has led KGK to global prominence, transforming it into an industry leader with cutting-edge infrastructure and world-class standards. His visionary leadership has driven the group’s expansion across diverse markets, establishing KGK as a name synonymous with trust, integrity, and excellence.",
-      description2:
-        "Under his guidance, the company continues to uphold its core values of ethical business practices and corporate responsibility.",
-      image: management,
-      socialLinks: [
-        { icon: Facebook, url: "https://facebook.com/navrattankothari" },
-        { icon: Twitter, url: "https://twitter.com/navrattankothari" },
-        { icon: Instagram, url: "https://instagram.com/navrattankothari" },
-        { icon: Linkedin, url: "https://linkedin.com/in/navrattankothari" },
-      ],
-    },
   
      {
       name: "Navrattan Kothari",
       title: "Patriarch",
       description1:
-        "Since 1962, Mr. Navrattan Kothari has led KGK to global prominence, transforming it into an industry leader with cutting-edge infrastructure and world-class standards. His visionary leadership has driven the group’s expansion across diverse markets, establishing KGK as a name synonymous with trust, integrity, and excellence.",
-      description2:
-        "Under his guidance, the company continues to uphold its core values of ethical business practices and corporate responsibility.",
+        "Since 1962, Mr. Navrattan Kothari has led KGK to global prominence, transforming it into an industry leader with cutting-edge infrastructure and world-class standards. His visionary leadership has driven the group’s expansion across diverse markets, establishing KGK as a name synonymous with trust, integrity, and excellence. ",
+       description2:" Under his guidance, the company continues to uphold its core values of ethical business practices and corporate responsibility.",
       image: management,
       socialLinks: [
         { icon: Facebook, url: "https://facebook.com/navrattankothari" },
@@ -46,12 +30,11 @@ const AboutLeadership = () => {
     },
 
      {
-      name: "Navrattan Kothari",
-      title: "Patriarch",
-      description1:
-        "Since 1962, Mr. Navrattan Kothari has led KGK to global prominence, transforming it into an industry leader with cutting-edge infrastructure and world-class standards. His visionary leadership has driven the group’s expansion across diverse markets, establishing KGK as a name synonymous with trust, integrity, and excellence.",
-      description2:
-        "Under his guidance, the company continues to uphold its core values of ethical business practices and corporate responsibility.",
+      name: "Sanjay Kothari",
+      title: "Vice Chairman",
+              
+      description1: "Operating from Hong Kong, Sanjay Kothari has been instrumental in KGK’s expansion into new markets. He has played a pivotal role in overseeing the entire gems and jewelry spectrum—from mining to retail—while also driving initiatives in real estate and IT. His leadership has contributed to advancements in diamond manufacturing, global sales, and corporate identity, reinforcing KGK’s standing as a diversified global enterprise.",
+    
       image: management,
       socialLinks: [
         { icon: Facebook, url: "https://facebook.com/navrattankothari" },
@@ -74,42 +57,42 @@ const AboutLeadership = () => {
   const currentLeader = leaders[currentSlide];
 
   return (
-    <section className="w-full lg:py-16 py-12 lg:px-0 px-4 bg-[#e6e6e6]">
+    <section className="w-full lg:py-16 py-10 lg:px-0 px-2 bg-[#e6e6e6]">
       <div>
         <div className="text-center lg:mb-12 mb-6">
-          <h1 className="text-2xl md:text-4xl font-light text-[#966326] mb-3 leading-tight">
+          <h1 className="text-2xl md:text-[43px] font-semibold text-[#966326] mb-3 leading-[45px]">
             VISIONARY LEADERSHIP,
             <br />
             TIMELESS LEGACY
           </h1>
-          <p className="text-gray-600 text-lg font-light lg:mb-8 mb-4">
-            Pioneering Excellence Across Industries
+          <p className="text-gray-600 text-xl font-light lg:mb-8 mb-4">
+         Inspiring Progress Across Industries 
           </p>
         </div>
 
         <div className="lg:pl-[6rem] px-6 lg:px-0 pr-0">
-          <div className="flex items-center mb-2">
-            <h2 className="lg:text-4xl text-2xl text-dark mr-6">
+          <div className="flex items-center mb-3">
+            <h2 className="lg:text-[42px] text-2xl text-dark mr-6">
               {currentLeader.name}
             </h2>
             <div className="h-px bg-customGray1 flex-1"></div>
           </div>
 
-          <p className="text-primary uppercase lg:text-base mb-2 mt-2 text-sm tracking-[2px]">
+          <p className="text-primary uppercase lg:text-lg mb-2 mt-2 text-sm tracking-[2px]">
             {currentLeader.title}
           </p>
         </div>
 
         <div className="px-4 lg:px-[6rem]">
           <div className="overflow-hidden">
-            <div className="flex flex-col items-center lg:flex-row lg:gap-20 gap-10">
+            <div className="flex flex-col items-center lg:flex-row lg:gap-20 gap-4">
               {/* Left Content */}
               <div className="lg:w-1/2 py-4 lg:py-6 flex flex-col justify-center">
-                <div className="mb-8 space-y-4">
-                  <p className="text-gray-600 leading-relaxed text-justify text-sm lg:text-lg mb-3">
+                <div className="lg:mb-8 mb-2 space-y-4">
+                  <p className="text-black leading-relaxed text-justify text-sm lg:text-lg lg:mb-3 mb-1">
                     {currentLeader.description1}
                   </p>
-                  <p className="text-gray-600 leading-relaxed text-justify font-semibold text-sm lg:w-[80%] lg:text-lg">
+                  <p className="text-black leading-relaxed text-justify font-semibold text-sm lg:w-[80%] lg:text-lg">
                     {currentLeader.description2}
                   </p>
                 </div>
@@ -178,14 +161,14 @@ const AboutLeadership = () => {
           <div className="flex justify-end lg:mr-8 mt-10 space-x-4">
             <button
               onClick={prevSlide}
-              className="w-12 h-12 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#D2691E] hover:text-white transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="lg:w-12 lg:h-12 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#D2691E] hover:text-white transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={leaders.length <= 1}
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={nextSlide}
-              className="w-12 h-12 bg-[#D2691E] text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#B8631C] transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="lg:w-12 lg:h-12 w-10 h-10 bg-[#D2691E] text-white rounded-full shadow-lg flex items-center justify-center hover:bg-[#B8631C] transition-all duration-300 hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed"
               disabled={leaders.length <= 1}
             >
               <ChevronRight size={20} />

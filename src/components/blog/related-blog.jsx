@@ -39,10 +39,10 @@ const RelatedBlog = () => {
               <p className="text-gray-700 text-base leading-6 mb-4">{blog.description1}</p>
               <div className="flex items-center justify-center gap-4 text-sm text-gray-500 mb-5">
                 <div className="flex items-center gap-1">
-                  <User size={14} />
+                  {/* <User size={14} /> */}
                   <span className="text-black">{blog.author}</span>
                 </div>
-                <div className="flex items-center gap-1">
+                <div className="flex items-center gap-2">
                   <Calendar size={14} />
                   <span className="text-black">{blog.date}</span>
                 </div>
@@ -50,7 +50,7 @@ const RelatedBlog = () => {
 
               <Link
                 to={`/blog/${blog.slug}`}
-                className="inline-block text-[#C78B36] hover:underline bg-[#966326] text-white px-8 py-2.5 text-sm font-medium hover:bg-[#a9742d] transition flex mx-auto w-fit uppercase hover:decoration-none"
+                className="inline-block text-[#C78B36] hover:underline bg-[#966326] text-white px-12 py-3 text-sm font-medium hover:bg-[#a9742d] transition flex mx-auto w-fit uppercase hover:decoration-none"
               >
                 Read More
               </Link></div>

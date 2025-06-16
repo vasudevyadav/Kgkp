@@ -27,23 +27,23 @@ const OfficeAddress = () => {
         {officeData.map((office, index) => (
           <div
             key={index}
-            className="flex flex-col items-center md:items-start p-6 "
+            className="flex flex-col items-center md:items-start lg:p-6 p-0 "
           >
             <div className="flex flex-row gap-6 items-center mb-6">
-              <div className="w-24 h-24 rounded-full overflow-hidden mb-3">
+              <div className="w-32 h-32 rounded-full overflow-hidden mb-3">
                 <img
                   src={office.image}
                   alt={office.city}
                   className="w-full h-full object-cover"
                 />
               </div>
-              <h3 className="text-xl font-bold text-gray-800">{office.city}</h3>
+              <h3 className="text-2xl font-bold text-gray-800">{office.city}</h3>
             </div>
 
-            <div className="flex flex-col gap-4 w-full">
+            <div className="flex flex-col gap-6 w-full">
               {/* Address */}
               <div className="flex gap-3 items-start">
-                <div className="text-gray-500 mt-1 w-8 h-8 flex rounded-full justify-center items-center bg-white">
+                <div className="text-gray-500 w-12 h-12 flex rounded-full justify-center items-center bg-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -65,11 +65,11 @@ const OfficeAddress = () => {
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-gray-700">
+                <p className="text-lg text-gray-700 lg:w-[90%] w-[80%]">
                   {office.address.split("\n").map((line, i) => (
                     <React.Fragment key={i}>
                       {line}
-                      <br />
+
                     </React.Fragment>
                   ))}
                 </p>
@@ -77,7 +77,7 @@ const OfficeAddress = () => {
 
               {/* Primary phone */}
               <div className="flex gap-3 items-center">
-                <div className="text-gray-500 mt-1 w-8 h-8 flex rounded-full justify-center items-center bg-white">
+                <div className="text-gray-500 w-12 h-12 flex rounded-full justify-center items-center bg-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -93,12 +93,12 @@ const OfficeAddress = () => {
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-gray-700">{office.phones[0]}</p>
+                <p className="text-lg text-gray-700">{office.phones[0]}</p>
               </div>
 
               {/* Additional phones */}
               <div className="flex gap-3 items-center">
-                <div className="text-gray-500 mt-1 w-8 h-8 flex rounded-full justify-center items-center bg-white">
+                <div className="text-gray-500 w-12 h-12 flex rounded-full justify-center items-center bg-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -117,7 +117,7 @@ const OfficeAddress = () => {
                 <div>
                   {Array.isArray(office.phones[1]) &&
                     office.phones[1].map((phone, i) => (
-                      <p key={i} className="text-sm text-gray-700">
+                      <p key={i} className="text-lg text-gray-700">
                         {phone}
                       </p>
                     ))}
@@ -126,7 +126,7 @@ const OfficeAddress = () => {
 
               {/* Email */}
               <div className="flex gap-3 items-center">
-                <div className="text-gray-500 mt-1 w-8 h-8 flex rounded-full justify-center items-center bg-white">
+                <div className="text-gray-500 w-12 h-12 flex rounded-full justify-center items-center bg-white">
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
                     className="h-5 w-5"
@@ -142,7 +142,7 @@ const OfficeAddress = () => {
                     />
                   </svg>
                 </div>
-                <p className="text-sm text-gray-700">{office.email}</p>
+                <p className="text-lg text-gray-700">{office.email}</p>
               </div>
             </div>
           </div>

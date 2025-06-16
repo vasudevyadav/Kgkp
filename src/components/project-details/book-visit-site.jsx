@@ -10,6 +10,8 @@ const BookVisitSite = ({ data, slug, projectName }) => {
   });
 
   const [submitted, setSubmitted] = useState(false);
+  const [message, setMessage] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (e) => {
     const { id, value } = e.target;
@@ -20,27 +22,37 @@ const BookVisitSite = ({ data, slug, projectName }) => {
     e.preventDefault();
 
     const payload = {
-      ...formData,
-      slug,
-      projectName,
+      name: formData.name,
+      email: formData.email,
+      contact: formData.contact,
+      date: formData.date,
+      slug: slug || window.location.pathname, // fallback to current URL
+      project_name: projectName,
     };
 
     try {
-      const res = await fetch("https://your-api.com/api/site-visit", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(payload),
-      });
+      const res = await fetch(
+        `${process.env.REACT_APP_API_BASE_URL}/book-visit`,
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
 
       if (res.ok) {
         setSubmitted(true);
-        alert("Your request has been submitted!");
+        setIsError(false);
+        setMessage("Your request has been submitted!");
         setFormData({ name: "", email: "", contact: "", date: "" });
       } else {
-        alert("Something went wrong. Please try again.");
+        setIsError(true);
+        setMessage("Something went wrong. Please try again.");
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setIsError(true);
+      setMessage("Something went wrong. Please try again.");
     }
   };
 
@@ -78,7 +90,9 @@ const BookVisitSite = ({ data, slug, projectName }) => {
           </div>
 
           <div className="mb-8">
-            <label className="text-xs block mb-1" htmlFor="email">EMAIL*</label>
+            <label className="text-xs block mb-1" htmlFor="email">
+              EMAIL*
+            </label>
             <input
               id="email"
               type="email"
@@ -92,17 +106,14 @@ const BookVisitSite = ({ data, slug, projectName }) => {
 
           <div className="flex gap-8 mb-10">
             <div className="w-1/2 relative">
-              {!formData.date && (
-                <span className="absolute left-0 top-1/2 -translate-y-1/2 text-white text-sm pointer-events-none">
-                  DATE*
-                </span>
-              )}
+
               <input
                 id="date"
                 type="date"
                 value={formData.date}
                 onChange={handleChange}
-                className={`w-full border-b border-white bg-transparent outline-none text-white ${!formData.date ? "text-transparent" : ""}`}
+                className={`w-full border-b border-white bg-transparent outline-none text-white ${!formData.date ? "text-transparent" : ""
+                  }`}
                 required
               />
             </div>
@@ -126,6 +137,16 @@ const BookVisitSite = ({ data, slug, projectName }) => {
           >
             SUBMIT
           </button>
+
+          {/* Success or Error Message */}
+          {message && (
+            <p
+              className={`mt-4 text-sm font-medium ${isError ? "text-red-500" : "text-green-400"
+                }`}
+            >
+              {message}
+            </p>
+          )}
         </form>
       </div>
     </section>

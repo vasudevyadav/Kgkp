@@ -14,7 +14,7 @@ import SearchBar from '@/components/SearchBar';
 
 const HeroSection = () => {
   return (
-    <section className="hero-section relative lg:h-[90vh] h-[75vh] min-h-[500px] mb-0 lg:mb-12 relative">
+    <section className="hero-section relative lg:h-[90vh] h-[71vh] min-h-[500px] mb-0 lg:mb-12 relative">
 
       <Swiper
         loop={true}
@@ -78,17 +78,17 @@ const HeroSection = () => {
               Where Modern Luxury Meets Timeless Comfort.
             </h2>
           </div>
-          <div className="mt-6 w-full max-w-4xl mx-auto lg:hidden block">
+          {/* <div className="mt-6 w-full max-w-4xl mx-auto lg:hidden block">
             <SearchBar />
-          </div>
+          </div> */}
         </div>
 
       </div>
 
       {/* Floating Action Button */}
       <FloatingActionButton />
-      <div className='hidden lg:block'>
-        <div className="absolute -bottom-10 left-[50%]  lg:w-[60%] w-full translate-x-[-50%] flex items-center justify-center z-10 text-center text-white px-4 flex-col">
+      <div className='block'>
+        <div className="absolute lg:-bottom-10 -bottom-20 left-[50%]  lg:w-[60%] w-full translate-x-[-50%] flex items-center justify-center z-10 text-center text-white px-4 flex-col">
 
           <div className=" w-full max-w-4xl mx-auto">
             <SearchBar />

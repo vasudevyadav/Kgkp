@@ -62,14 +62,24 @@ const LocationMap = () => {
     <section className="py-12 bg-white relative">
       <div className=" pl-0 grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
         <div className="h-px bg-customGray1 flex-1"></div>
-        <p className="text-primary uppercase lg:text-base text-sm  tracking-[2px] text-center lg:text-left">
+        <p className="text-primary uppercase lg:text-base text-sm px-6 lg:px-0  tracking-[2px] text-center lg:text-left">
           {`Rajasthan’s Premier Real Estate Developer`}
         </p>
       </div>
 
       <div className="container-fluid md:pl-0 grid grid-cols-1 md:grid-cols-2 gap-10 items-start pt-4">
         {/* Left: Map */}
-        <div className="p-4 pl-[5rem]">
+        <div className="p-4 lg:pl-[5rem] ">
+            <div className='lg:hidden block'>
+          <h2 className="lg:text-4xl text-2xl mb-6" data-aos="fade-up">
+            Our Locations
+          </h2>
+          <p className="text-gray-600 mb-10" data-aos="fade-up" data-aos-delay="100">
+            {`Each location is chosen for convenience, growth potential, and a better lifestyle, providing opportunities for families and professionals alike.
+`}
+          </p>
+          </div>
+
           <img
             key={lastCity}
             src={cityMaps[lastCity]}
@@ -80,6 +90,8 @@ const LocationMap = () => {
         </div>
 
         <div className='lg:pl-10'>
+         
+         <div className='lg:block hidden'>
           <h2 className="lg:text-4xl text-2xl mb-6" data-aos="fade-up">
             Our Locations
           </h2>
@@ -87,6 +99,7 @@ const LocationMap = () => {
             {`Each location is chosen for convenience, growth potential, and a better lifestyle, providing opportunities for families and professionals alike.
 `}
           </p>
+          </div>
 
           <div className="px-0 md:max-w-md mx-auto">
             {Object.entries(locations).map(([city, places]) => (

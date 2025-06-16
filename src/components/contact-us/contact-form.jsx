@@ -213,24 +213,24 @@ const ContactForm = () => {
       </div>
 
       {/* Contact Options */}
-      <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-5 md:gap-10 mt-16 mb-6">
+      <div className="flex flex-col md:flex-row items-start md:items-center justify-center gap-5 md:gap-24 mt-24 mb-4">
         <div className="flex items-center gap-3">
-          <div className="bg-[#F2F2F2] p-3 rounded-full">
-            <img src={EmailImage} alt="Email Icon" className="w-10 h-10" />
+          <div className="bg-[#F2F2F2] p-4 rounded-full">
+            <img src={EmailImage} alt="Email Icon" className="w-12 h-12" />
           </div>
           <div>
-            <p className="text-sm">E-mail us</p>
-            <p className="text-sm">sales@gkrealty.com</p>
+            <p className="text-lg">E-mail us</p>
+            <p className="text-lg">sales@gkrealty.com</p>
           </div>
         </div>
 
         <div className="flex items-center gap-3">
-          <div className="bg-[#F2F2F2] p-3 rounded-full">
-            <img src={WhatappImage} alt="WhatsApp Icon" className="w-10 h-10" />
+          <div className="bg-[#F2F2F2] p-4 rounded-full">
+            <img src={WhatappImage} alt="WhatsApp Icon" className="w-12 h-12" />
           </div>
           <div>
-            <p className="text-sm">Whatsapp chat with us</p>
-            <p className="text-sm">+91 82828 26005</p>
+            <p className="text-lg">Whatsapp chat with us</p>
+            <p className="text-lg">+91 82828 26005</p>
           </div>
         </div>
       </div>

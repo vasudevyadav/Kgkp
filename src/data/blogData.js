@@ -10,7 +10,7 @@ const blogData = [
     category: 'Real Estate',
     views: '2.5k',
     tags: ['Real Estate', 'Flats'],
-    description1: `When we hear the word affordable, the first thing that comes to our mind is a basic home with limited facilities and amenities. However, this is not the case with affordable flats in Jaipur. These properties offer excellent value for money while providing modern amenities and quality construction.`,
+    description: `When we hear the word affordable, the first thing that comes to our mind is a basic home with limited facilities and amenities. However, this is not the case with affordable flats in Jaipur. These properties offer excellent value for money while providing modern amenities and quality construction.`,
     description2: `In Jaipur, affordable flats come with thoughtfully designed layouts that maximize space utilization and provide comfortable living for families of all sizes. The city's real estate market has evolved significantly, offering affordable options without compromising on quality or location.`,
     tableOfContents: [
       'What Makes Them a Good Choice For Every Family?',

@@ -27,7 +27,7 @@ const HeroSection = ({ title, background, breadcrumbs }) => {
 
       <div className="relative z-10 text-center text-white px-4 py-6">
         {/* Heading */}
-        <h1 className="text-2xl lg:text-4xl mb-2 drop-shadow-lg">{title}</h1>
+        <h1 className="text-2xl lg:text-5xl mb-2 drop-shadow-lg">{title}</h1>
 
         {/* Breadcrumbs */}
         <nav className="text-sm lg:text-lg flex justify-center flex-wrap gap-2 drop-shadow">

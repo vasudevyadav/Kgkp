@@ -3,8 +3,15 @@ import React, { useState, useEffect } from 'react';
 const FloorPlan = ({ data }) => {
   const [zoomImage, setZoomImage] = useState(null);
   const [activeTab, setActiveTab] = useState('unit');
+  const [floorPlans, setFloorPlans] = useState([]);
 
-  const floorPlans = data?.plans || [];
+  const sectionData = data?.FloorPlanSection;
+
+  useEffect(() => {
+    if (sectionData?.tabs?.[activeTab]) {
+      setFloorPlans(sectionData.tabs[activeTab]);
+    }
+  }, [activeTab, sectionData]);
 
   useEffect(() => {
     const handleEsc = (e) => {
@@ -19,7 +26,7 @@ const FloorPlan = ({ data }) => {
       {floorPlans.map((plan, index) => (
         <div key={index} className="relative group bg-white">
           <div
-            className="relative overflow-hidden cursor-pointer border-2 border-[#b8966b] p-4"
+            className="relative overflow-hidden cursor-pointer border-2 border-[#ce995b] p-4"
             onClick={() => setZoomImage(plan.image)}
           >
             <img
@@ -33,8 +40,8 @@ const FloorPlan = ({ data }) => {
             </div>
           </div>
           <div className="mt-4">
-            <h3 className="text-sm font-bold mb-1">{plan.title}</h3>
-            <p className="text-sm text-gray-700 mb-1">{plan.size}</p>
+            <h3 className="text-base font-bold mb-1">{plan.title}</h3>
+            <p className="text-sm  font-medium text-gray-700 mb-1">{plan.size}</p>
             <p className="text-sm text-gray-500 whitespace-pre-line">{plan.description}</p>
           </div>
         </div>
@@ -45,14 +52,14 @@ const FloorPlan = ({ data }) => {
   return (
     <section className="w-full lg:py-14 py-8 bg-white">
       <div className="mx-auto">
-        <div className="text-center mb-20">
-          <p className="text-amber-700 uppercase text-sm tracking-widest mb-6 bg-white inline-block px-10 py-2">
-            {data?.tagline || 'Lorem ipsum dolor sit amet'}
+        <div className="text-center mb-16">
+          <p className="text-amber-700 uppercase text-base tracking-widest mb-8 bg-white inline-block px-10 py-2">
+            {sectionData?.tagline || 'Floorplan Tagline'}
           </p>
 
           <div className="bg-[#e8e8e8] w-full h-[2px] rounded-full mb-10 relative">
             <p className="text-2xl lg:text-4xl font-light text-gray-800 absolute -top-6 left-1/2 -translate-x-1/2 bg-white lg:px-10 px-6 py-2">
-              {data?.title || 'Floor Plan'}
+              {sectionData?.title || 'Floor Plan'}
             </p>
           </div>
         </div>
@@ -61,7 +68,7 @@ const FloorPlan = ({ data }) => {
           <div className="flex justify-center gap-4 mb-12">
             <button
               onClick={() => setActiveTab('master')}
-              className={`border px-8 py-3 text-sm ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
+              className={`border px-8 py-3 text-base ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
             >
               MASTER PLAN
             </button>
@@ -77,7 +84,7 @@ const FloorPlan = ({ data }) => {
 
           {zoomImage && (
             <div
-              className="fixed inset-0 bg-black bg-opacity-70 z-50 flex items-center justify-center"
+              className="fixed inset-0 bg-black bg-opacity-90 z-50 flex items-center justify-center"
               onClick={() => setZoomImage(null)}
             >
               <div
@@ -86,7 +93,7 @@ const FloorPlan = ({ data }) => {
               >
                 <button
                   onClick={() => setZoomImage(null)}
-                  className="absolute top-2 right-2 bg-black w-10 h-10 rounded-full flex justify-center text-white items-center text-4xl font-bold hover:text-red-600"
+                  className=" fixed lg:top-6 lg:right-32 right-5 bg-black w-10 h-10 rounded-full flex justify-center text-white items-center text-4xl font-bold hover:text-red-600"
                 >
                   ×
                 </button>

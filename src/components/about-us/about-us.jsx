@@ -5,7 +5,7 @@ import bgImage from "@/assets/images/about-main-bg.png"; // Replace with your ac
 const AboutInfo = () => {
   return (
     <section
-      className="w-full container-fluid py-7 lg:py-2 bg-white bg-cover bg-center bg-no-repeat"
+      className="w-full container-fluid py-7 lg:py-2 bg-white bg-contain  bg-bottom bg-no-repeat"
       style={{
         backgroundImage: `url(${bgImage})`,
       }}

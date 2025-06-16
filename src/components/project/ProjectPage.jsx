@@ -1,27 +1,29 @@
 import React, { useState, useEffect } from 'react';
 import { CheckIcon, MapPin, Building2, ChevronDown } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import allProjects from '../../data/projectsData';
+import { Pagination, Autoplay } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
+import 'swiper/css';
+import 'swiper/css/pagination';
 
 const projectContent = {
   Residential: {
-    subheading: 'Creating Elevated Living with Thoughtfully Designed Residences',
-    heading: 'Explore Our Premium Residential Projects in Jaipur',
+    subheading: 'Designing Dreams into Reality',
+    heading: ' Our Residential Projects in Jaipur',
   },
   Commercial: {
-    subheading: 'TRANSFORMING JAIPUR’S SKYLINE WITH PREMIUM COMMERCIAL SPACES',
+    subheading: 'Shaping Iconic Commercial Destinations',
     heading: 'Our Landmark Commercial Developments in Jaipur',
   },
   Industrial: {
     subheading: 'REVOLUTIONIZING JAIPUR’S INDUSTRIAL LANDSCAPE',
-    heading: 'Setting New Standards in Premium Industrial Infrastructure',
+    heading: 'Our Premium Industrial Projects in Jaipur',
   },
   Default: {
-   subheading: 'Creating Elevated Living with Thoughtfully Designed Residences',
+    subheading: 'Creating Elevated Living with Thoughtfully Designed Residences',
     heading: 'Explore Our Premium Residential Projects in Jaipur',
   },
 };
-
 
 const ProjectPage = ({ projectType }) => {
   const [filters, setFilters] = useState({
@@ -31,45 +33,29 @@ const ProjectPage = ({ projectType }) => {
     budget: '',
     availability: '',
   });
-
   const [openDropdown, setOpenDropdown] = useState(null);
-  const [isMobile, setIsMobile] = useState(false);
-  const [showAll, setShowAll] = useState(false);
+  const [projects, setProjects] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [projects,setProjects] =useState([]);
-console.log('projects',projects);
-
+  const [showMobileFilter, setShowMobileFilter] = useState(false);
 
   useEffect(() => {
-  fetchProjects();
-}, [projectType]);
+    fetchProjects();
+  }, [projectType]);
 
-const fetchProjects = async () => {
-  try {
-    setLoading(true);
-
-    // Build the URL with query params
-    const url = new URL(`${process.env.REACT_APP_API_BASE_URL}/projects`);
-    url.searchParams.append('type', projectType.toLowerCase());
-
-    const response = await fetch(url.toString(), {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    if (!response.ok) {
-      throw new Error('Network response was not ok');
+  const fetchProjects = async () => {
+    try {
+      setLoading(true);
+      const url = new URL(`${process.env.REACT_APP_API_BASE_URL}/projects`);
+      url.searchParams.append('type', projectType.toLowerCase());
+      const response = await fetch(url.toString());
+      const data = await response.json();
+      setProjects(data?.projects || []);
+    } catch (error) {
+      console.error('Failed to fetch projects:', error);
+    } finally {
+      setLoading(false);
     }
-    const data = await response.json();
-    setProjects(data?.projects);
-  } catch (error) {
-    console.error('Failed to fetch projects:', error);
-  } finally {
-    setLoading(false);
-  }
-};
-
+  };
 
   const handleDropdownToggle = (dropdown) => {
     setOpenDropdown(openDropdown === dropdown ? null : dropdown);
@@ -119,35 +105,23 @@ const fetchProjects = async () => {
   };
 
   const residentialOptions = ['All', 'Apartments', 'Villas', 'Penthouses'];
-  const locationOptions = ['All', 'C Scheme', 'Mansarovar', 'Jagatpura', 'Vaishali Nagar', 'Pratap Nagar'];
-  const propertyTypeOptions = ['All', '2 BHK', '3 BHK', '4 BHK', '5 BHK'];
+  const locationOptions = ['All', 'Mansarovar', 'Siddharth Nagar', 'Bagru', 'Jaipur'];
+  const propertyTypeOptions = ['All', '2 BHK', '3 BHK', '4 BHK', '3 & 4 BHK', 'Residential and Commercial SPACE'];
   const budgetOptions = ['All', 'Under 50L', '50L - 1Cr', '1Cr - 2Cr', 'Above 2Cr'];
   const availabilityOptions = ['All', 'Ready to Move', 'Under Construction'];
-
-  useEffect(() => {
-    const checkMobile = () => setIsMobile(window.innerWidth < 768);
-    checkMobile();
-    window.addEventListener('resize', checkMobile);
-    return () => window.removeEventListener('resize', checkMobile);
-  }, []);
 
   const { subheading, heading } = projectContent[projectType] || projectContent.Default;
 
   let filteredProjects = projects.filter((p) => {
-   if (p.type?.toLowerCase() != projectType?.toLowerCase()) return false;
-    const hasName = p.name && p.name.trim() != '' && p.name != '-';
-    const hasImage = p.image && p.image.trim() != '';    
-    if (projectType?.toLowerCase() == 'industrial') return hasName || hasImage;
-    const hasLocation = (p.address && p.address != '-') || (p.locality && p.locality != '-') || (p.city && p.city != '-');
-    const hasUnits = p.units && p.units != '-' && p.units.toString().trim() != '';
-    console.log("b",hasImage,hasName);
+    if (p.type?.toLowerCase() !== projectType?.toLowerCase()) return false;
+    const hasName = p.name && p.name.trim() !== '' && p.name !== '-';
+    const hasImage = p.image && p.image.trim() !== '';
+    if (projectType?.toLowerCase() === 'industrial') return hasName || hasImage;
+    const hasLocation = (p.address && p.address !== '-') || (p.locality && p.locality !== '-') || (p.city && p.city !== '-');
+    const hasUnits = p.units && p.units !== '-' && p.units.toString().trim() !== '';
     return hasName && hasImage && (hasLocation || hasUnits);
   });
 
-  console.log("filteredProjects",filteredProjects);
-  
-
-  // Apply all filters
   filteredProjects = filteredProjects.filter((p) => {
     const matchLocation =
       filters.location === '' || filters.location === 'All' ||
@@ -180,112 +154,131 @@ const fetchProjects = async () => {
     return matchLocation && matchPropertyType && matchResidential && matchBudget && matchAvailability;
   });
 
-  const visibleProjects = isMobile && !showAll ? filteredProjects.slice(0, 4) : filteredProjects;
+  const mid = Math.ceil(filteredProjects.length / 2);
+  const firstHalf = filteredProjects.slice(0, mid);
+  const secondHalf = filteredProjects.slice(mid);
+
+  const renderSwiper = (projects) => (
+    <Swiper
+      modules={[Pagination, Autoplay]}
+      spaceBetween={20}
+      slidesPerView={1}
+      autoplay={{ delay: 3000 }}
+      loop={true}
+      pagination={{ clickable: true }}
+      breakpoints={{
+        768: { slidesPerView: 2 },
+        1024: { slidesPerView: 3 },
+      }}
+      className="mt-8"
+    >
+      {projects.map((proj, i) => (
+        <SwiperSlide key={i}>
+          <div className="bg-white rounded-xl overflow-hidden flex flex-col h-full">
+            <div className="relative overflow-hidden rounded-xl">
+              <img
+                src={proj.image}
+                alt={proj.name}
+                className="w-full h-80 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-105"
+              />
+              {proj.logo && (
+                <img
+                  src={proj.logo}
+                  alt="Project Logo"
+                  className="absolute top-4 left-4 w-24 h-24 rounded-full bg-white p-1 object-contain"
+                />
+              )}
+            </div>
+            <div className="p-3 flex-1 flex flex-col justify-between mt-3">
+              <div>
+                <h4 className="text-xl font-bold mb-2">{proj.name}</h4>
+                {projectType?.toLowerCase() !== 'industrial' && (
+                  <div className="mt-1 flex gap-1 items-start text-sm text-gray-700">
+                    <MapPin size={16} className="mt-0.5 text-primary shrink-0" />
+                    <div>
+                      <p>{proj.address && proj.address !== '-' ? proj.address : 'Address not available'}</p>
+                      <p>{[proj.locality, proj.city].filter(val => val && val !== '-').join(', ') || 'Location not specified'}</p>
+                    </div>
+                  </div>
+                )}
+                {projectType?.toLowerCase() === 'industrial' ? (
+                  <div className="mt-2">
+                    {proj.status && (
+                      <p className="text-green-600 text-sm flex items-center gap-1">
+                        <CheckIcon strokeWidth={4.5} className="text-green-500 text-xs" />
+                        Rera Approved
+                      </p>
+                    )}
+                  </div>
+                ) : (
+                  <div className="flex justify-between items-center mt-2">
+                    <p className="flex items-center gap-1">
+                      <Building2 size={16} className="text-primary" />
+                      Unit: {proj.units && proj.units !== '-' ? proj.units : 'Not specified'}
+                    </p>
+                    {proj.status && (
+                      <p className="text-green-600 text-sm flex items-center gap-1">
+                        <CheckIcon strokeWidth={4.5} className="text-green-500 text-xs" />
+                        Rera Approved
+                      </p>
+                    )}
+                  </div>
+                )}
+              </div>
+              <Link
+                to={`/project-details/${proj.slug}`}
+                className="border border-customGray3 px-8 py-2 hover:border-secondary hover:bg-secondary hover:text-white transition self-center mt-6 mb-4 text-center"
+              >
+                Know More
+              </Link>
+            </div>
+          </div>
+        </SwiperSlide>
+      ))}
+    </Swiper>
+  );
 
   return (
     <section className="lg:py-16 py-10 bg-[#F1F1F1]">
-      
       <div className="container-fluid !pr-0 mb-6">
-         <p className="text-primary uppercase text-sm tracking-[2px] mr-4 mb-3">{subheading}</p>
+        <p className="text-primary uppercase text-sm tracking-[2px] mr-4 mb-3">{subheading}</p>
         <div className="flex items-center mb-2">
-                  <h2 className="text-2xl lg:text-4xl text-dark mr-4">{heading}</h2>
+          <h2 className="text-2xl lg:text-4xl text-dark mr-4">{heading}</h2>
           <div className="h-px bg-customGray1 flex-1"></div>
         </div>
       </div>
 
       <div className="container-fluid">
-        <div className="lg:flex bg-white my-5 items-center">
-          <div className="flex-1 min-w-0">{renderDropdown(filters.residential || 'RESIDENTIAL', residentialOptions, 'residential')}</div>
-          <div className="flex-1 min-w-0">{renderDropdown(filters.location || 'LOCATION', locationOptions, 'location')}</div>
-          <div className="flex-1 min-w-0">{renderDropdown(filters.propertyType || 'PROPERTY TYPE', propertyTypeOptions, 'propertyType')}</div>
-          <div className="flex-1 min-w-0">{renderDropdown(filters.budget || 'BUDGET', budgetOptions, 'budget')}</div>
-          <div className="flex-1 min-w-0">{renderDropdown(filters.availability || 'AVAILABILITY', availabilityOptions, 'availability')}</div>
+        <div className="block lg:hidden mb-4">
           <button
-            onClick={handleReset}
-            className="px-2 py-3 bg-black lg:w-36 w-[93%] text-center text-white font-medium hover:bg-gray-800 focus:outline-none m-3"
+            onClick={() => setShowMobileFilter(!showMobileFilter)}
+            className="w-full bg-primary text-white py-3 text-center font-semibold"
           >
-            RESET
+            {showMobileFilter ? 'Hide Filters' : 'Apply Filters'}
           </button>
         </div>
 
-        {/* Project Cards */}
-        {visibleProjects.length > 0 ? (
-          <>
-            <div className="grid md:grid-cols-3 gap-10 mt-8">
-              {visibleProjects.map((proj, i) => (
-                <div key={i} className="bg-white rounded-xl shadow-md overflow-hidden flex flex-col">
-                  <div className="relative overflow-hidden rounded-xl">
-                    <img
-                      src={proj.image}
-                      alt={proj.name}
-                      className="w-full h-80 object-cover rounded-xl transition-transform duration-300 ease-in-out hover:scale-105"
-                    />
-                    {proj.logo && (
-                      <img
-                        src={proj.logo}
-                        alt="Project Logo"
-                        className="absolute top-4 left-4 w-24 h-24 rounded-full bg-white p-1 object-contain"
-                      />
-                    )}
-                  </div>
-                  <div className="p-3 flex-1 flex flex-col justify-between">
-                    <div>
-                      <h4 className="text-xl font-bold">{proj.name}</h4>
-                      {projectType?.toLowerCase() != 'industrial' && (
-                        <div className="mt-1 flex gap-1 items-start text-sm text-gray-700">
-                          <MapPin size={16} className="mt-0.5 text-primary shrink-0" />
-                          <div>
-                            <p>{proj.address && proj.address !== '-' ? proj.address : 'Address not available'}</p>
-                            <p>{[proj.locality, proj.city].filter(val => val && val !== '-').join(', ') || 'Location not specified'}</p>
-                          </div>
-                        </div>
-                      )}
-                      {projectType?.toLowerCase() == 'industrial' ? (
-                        <div className="mt-2">
-                          {proj.status ? (
-                            <p className="text-green-600 text-sm flex items-center gap-1">
-                              <CheckIcon strokeWidth={4.5} className="text-green-500 text-xs" />
-                              Rera Approved
-                            </p>
-                          ):""}
-                        </div>
-                      ) : (
-                        <div className="flex justify-between items-center mt-2">
-                          <p className="flex items-center gap-1">
-                            <Building2 size={16} className="text-primary" />
-                            Unit: {proj.units && proj.units !== '-' ? proj.units : 'Not specified'}
-                          </p>
-                           {proj.status ? (
-                          <p className="text-green-600 text-sm flex items-center gap-1">
-                            <CheckIcon strokeWidth={4.5} className="text-green-500 text-xs" />
-                            Rera Approved
-                          </p>
-                           ):""}
-                        </div>
-                      )}
-                    </div>
-                    <Link
-                      to={`/project-details/${proj.slug}`}
-                      className="border border-customGray3 px-8 py-2 hover:border-secondary hover:bg-secondary hover:text-white transition self-center mt-6 mb-4 text-center"
-                    >
-                      Know More
-                    </Link>
-                  </div>
-                </div>
-              ))}
-            </div>
+        {(showMobileFilter || window.innerWidth >= 1024) && (
+          <div className="lg:flex bg-white my-5 items-center flex-wrap gap-1">
+            <div className="flex-1 min-w-0">{renderDropdown(filters.residential || 'RESIDENTIAL', residentialOptions, 'residential')}</div>
+            <div className="flex-1 min-w-0">{renderDropdown(filters.location || 'LOCATION', locationOptions, 'location')}</div>
+            <div className="flex-1 min-w-0">{renderDropdown(filters.propertyType || 'PROPERTY TYPE', propertyTypeOptions, 'propertyType')}</div>
+            <div className="flex-1 min-w-0">{renderDropdown(filters.budget || 'BUDGET', budgetOptions, 'budget')}</div>
+            <div className="flex-1 min-w-0">{renderDropdown(filters.availability || 'AVAILABILITY', availabilityOptions, 'availability')}</div>
+            <button
+              onClick={handleReset}
+              className="px-2 py-3 bg-black lg:w-36 w-[93%] text-center text-white font-medium hover:bg-gray-800 focus:outline-none m-3"
+            >
+              RESET
+            </button>
+          </div>
+        )}
 
-            {isMobile && filteredProjects.length > 4 && (
-              <div className="flex justify-center mt-6">
-                <button
-                  onClick={() => setShowAll((prev) => !prev)}
-                  className="px-6 py-2 bg-[#B17C47] text-white text-sm rounded"
-                >
-                  {showAll ? 'Show Less' : 'Show More'}
-                </button>
-              </div>
-            )}
-          </>
+        {filteredProjects.length > 0 ? (
+          <div className="space-y-12">
+            {renderSwiper(firstHalf)}
+            {secondHalf.length > 0 && renderSwiper(secondHalf)}
+          </div>
         ) : (
           <div className="text-center py-12">
             <p className="text-gray-500 text-lg mb-2">No {projectType.toLowerCase()} projects available at the moment.</p>

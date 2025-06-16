@@ -10,6 +10,7 @@ const BlogRight = () => {
 
   const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
   const IMAGE_BASE_URL = process.env.REACT_APP_IMAGE_BASE_URL;
+  const FALLBACK_IMAGE = `${IMAGE_BASE_URL}/default-image.jpg`; // Replace with actual fallback if needed
 
   useEffect(() => {
     // Fetch Tags
@@ -66,7 +67,7 @@ const BlogRight = () => {
 
       {/* Tags Section */}
       <div className="mb-10">
-        <h3 className="text-2xl font-semibold text-black mb-6">Tags</h3>
+        <h3 className="text-2xl md:text-3xl font-semibold text-black mb-6">Tags</h3>
         <div className="flex flex-wrap gap-2">
           {tags.length > 0 ? (
             tags.map((tag) => (
@@ -85,35 +86,41 @@ const BlogRight = () => {
 
       {/* Popular Posts Section */}
       <div className="mb-10">
-        <h3 className="text-2xl font-semibold text-black mb-6">Popular Posts</h3>
+        <h3 className=" text-2xl md:text-3xl font-semibold text-black mb-6">Popular Posts</h3>
         <div className="space-y-4">
           {filteredPosts.length > 0 ? (
-            filteredPosts.map((post) => (
-              <Link
-                to={`/blog/${post.slug}`}
-                key={post.id}
-                className="flex items-center gap-4"
-              >
-                <img
-                  src={
-                    post.image?.startsWith('http')
-                      ? post.image
-                      : `${IMAGE_BASE_URL}${post.image}`
-                  }
-                  alt={post.title}
-                  className="w-24 h-16 object-cover rounded-sm"
-                />
-                <div className="flex-1">
-                  <h4 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-2">
-                    {post.title}
-                  </h4>
-                  <div className="flex items-center gap-1 text-xs text-gray-500 mt-1">
-                    <Calendar size={12} />
-                    <span>{post.date}</span>
+            filteredPosts.map((post) => {
+              const imageUrl =
+                typeof post.image === 'string'
+                  ? post.image.startsWith('http')
+                    ? post.image
+                    : `${IMAGE_BASE_URL}${post.image}`
+                  : FALLBACK_IMAGE;
+
+              return (
+                <Link
+                  to={`/blog/${post.slug}`}
+                  key={post.id}
+                  className="flex items-center gap-4"
+                >
+                  <img
+                    src={imageUrl}
+                    alt={post.title || 'Blog Post'}
+                    className="w-24 h-16 object-cover rounded-sm"
+                  />
+                  <div className="flex-1">
+                    
+                    <h4 className="text-sm font-semibold text-gray-900 leading-tight line-clamp-2">
+                      {post.title}
+                    </h4>
+                    <div className="flex items-center gap-1 text-xs text-gray-500 mt-2">
+                      <Calendar size={12} />
+                      <span>{post.date}</span>
+                    </div>
                   </div>
-                </div>
-              </Link>
-            ))
+                </Link>
+              );
+            })
           ) : (
             <p className="text-sm text-gray-500">No posts found.</p>
           )}

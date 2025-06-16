@@ -71,10 +71,10 @@ const Navbar = () => {
 
   return (
     <header
-      className={`fixed w-full z-50 transition-all duration-300 
-        bg-black
+      className={`fixed w-full z-50 transition-all duration-300 z-60 
+        bg-[#956325]
         lg:transition-colors
-        ${scrolled ? 'lg:bg-black/90 lg:backdrop-blur-sm lg:shadow-md' : 'lg:bg-transparent'}
+        ${scrolled ? 'lg: bg-[#956325] lg:backdrop-blur-sm lg:shadow-md' : 'lg:bg-transparent'}
       `}
     >
       <div className="container-fluid py-4 flex items-center justify-between">

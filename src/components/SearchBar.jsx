@@ -5,9 +5,7 @@ const SearchBar = () => {
   const [type, setType] = useState('');
 
   const allLocations = [
-    'New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami',
-    'Seattle', 'Boston', 'San Francisco', 'Denver', 'Atlanta'
-  ];
+    'Jaipur', 'Mumbai', 'Delhi', ];
 
   const allTypes = [
     'Residential', 'Commercial', 'Industrial'

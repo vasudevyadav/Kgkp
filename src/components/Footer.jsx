@@ -97,22 +97,22 @@ const Footer = () => {
       </div>
 
       {/* Contact & Quick Links */}
-      <div className="lg:px-12 px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8">
+      <div className="lg:px-12 px-6 py-8 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:gap-8 gap-3">
         {locations.map(({ city, phone, email, address }) => (
           <div key={city}>
             <h3 className="text-base font-semibold mb-5">{city}</h3>
-            <ContactRow icon={<FaPhoneAlt className="text-xs" />} center>
+            <ContactRow icon={<FaPhoneAlt className="text-sm" />} center>
               <div>
                 {phone.map((num, i) => (
-                  <p className="text-xs" key={i}>{num}</p>
+                  <p className="text-sm" key={i}>{num}</p>
                 ))}
               </div>
             </ContactRow>
-            <ContactRow icon={<FaEnvelope className="text-xs" />} center>
-              <p className="text-xs">{email}</p>
+            <ContactRow icon={<FaEnvelope className="text-sm" />} center>
+              <p className="text-sm">{email}</p>
             </ContactRow>
-            <ContactRow icon={<FaMapMarkerAlt className="text-xs" />}>
-              <p className="text-xs">{address}</p>
+            <ContactRow icon={<FaMapMarkerAlt className="text-sm" />}>
+              <p className="text-sm">{address}</p>
             </ContactRow>
           </div>
         ))}
@@ -125,7 +125,7 @@ const Footer = () => {
               <Link
                 to={path}
                 key={index}
-                className="text-xs hover:underline transition-colors duration-200 hover:no-underline"
+                className="text-sm hover:underline transition-colors duration-200 hover:no-underline"
               >
                 {label}
               </Link>
@@ -135,7 +135,7 @@ const Footer = () => {
       </div>
 
       {/* Bottom Copyright */}
-      <div className="text-center text-xs bg-[#a5a5a5] py-4">
+      <div className="text-center text-sm bg-[#a5a5a5] py-4">
          © 2024
         <a href=''>  KGK REALTY, </a>
        ALL RIGHTS RESERVED

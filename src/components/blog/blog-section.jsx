@@ -40,9 +40,13 @@ const BlogSection = () => {
             {blog.category}
           </p>
 
+  <Link
+            to={`/blog/${blog.slug}`}
+          >
           <h2 className="text-4xl font-bold text-gray-900 mb-4 leading-12 underline">
             {blog.title}
           </h2>
+          </Link>
 
           <div className="flex items-center gap-4 text-sm justify-center text-gray-500 mb-4">
             <div className="flex items-center gap-1">

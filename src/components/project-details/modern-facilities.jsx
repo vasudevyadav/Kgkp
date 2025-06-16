@@ -4,14 +4,20 @@ import React, { useState, useEffect } from "react";
 import { FaChevronLeft, FaChevronRight, FaPlay } from "react-icons/fa";
 
 const ModernFacilities = ({ data }) => {
-  const sliderData = data?.slider || [];
-  const videoData = data?.video || {};
+  const {
+    heading = "",
+    subheading = "",
+    description = "",
+    slider = [],
+    video = {}
+  } = data || {};
+
   const [activeIndex, setActiveIndex] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isAnimating, setIsAnimating] = useState(false);
   const [isMobile, setIsMobile] = useState(false);
 
-  const totalSlides = sliderData.length;
+  const totalSlides = slider.length;
 
   useEffect(() => {
     const checkScreenSize = () => {
@@ -25,10 +31,10 @@ const ModernFacilities = ({ data }) => {
 
   useEffect(() => {
     const interval = setInterval(() => {
-      handleNext();
+      if (!isAnimating) handleNext();
     }, 5000);
     return () => clearInterval(interval);
-  }, [activeIndex]);
+  }, [activeIndex, isAnimating]);
 
   const handleNext = () => {
     if (isAnimating) return;
@@ -56,11 +62,11 @@ const ModernFacilities = ({ data }) => {
     const thumbnails = [];
 
     if (isMobile) {
-      thumbnails.push({ ...sliderData[activeIndex], originalIndex: activeIndex });
+      thumbnails.push({ ...slider[activeIndex], originalIndex: activeIndex });
     } else {
       for (let i = 0; i < visibleCount; i++) {
         const index = (activeIndex - 1 + i + totalSlides) % totalSlides;
-        thumbnails.push({ ...sliderData[index], originalIndex: index });
+        thumbnails.push({ ...slider[index], originalIndex: index });
       }
     }
 
@@ -69,13 +75,13 @@ const ModernFacilities = ({ data }) => {
 
   return (
     <section>
-      <div className="w-full lg:pt-14 pt-6 bg-[#f5f5f5]">
+      <div className="w-full lg:pt-14 pt-6 bg-[#e6e6e6]">
         <div className="lg:pl-20 pl-6">
           <p className="text-primary uppercase text-sm tracking-[2px] mr-4 mb-3">
-            Elevating luxury living through
+            {subheading}
           </p>
           <div className="flex items-center mb-5">
-            <h2 className="lg:text-4xl text-2xl text-black mr-4">Modern Facilities</h2>
+            <h2 className="lg:text-4xl text-2xl text-black mr-4">{heading}</h2>
             <div className="h-px bg-customGray1 flex-1"></div>
           </div>
         </div>
@@ -84,7 +90,7 @@ const ModernFacilities = ({ data }) => {
           <div className="flex flex-col lg:flex-row gap-16 items-start">
             <div className="lg:w-[40%]">
               <p className="text-base text-[#333] leading-relaxed mb-8 mt-6">
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+                {description}
               </p>
               <button className="bg-[#B38F5F] text-white px-6 py-3 font-medium tracking-wider hover:bg-[#a07b4a] transition-all">
                 EXPERIENCE ALL LIFESTYLE
@@ -99,13 +105,21 @@ const ModernFacilities = ({ data }) => {
                     className="flex transition-transform duration-300 ease-in-out"
                     style={{ transform: `translateX(-${activeIndex * 100}%)` }}
                   >
-                    {sliderData.map((item, index) => (
+                    {slider.map((item, index) => (
                       <div key={index} className="w-full flex-shrink-0">
                         <div className="relative">
-                          <img src={item.image} alt={item.label} className="w-full h-[300px] object-cover" />
+                          <img
+                            src={item.image ? item.image : undefined}
+                            alt={item.label || "Slide Image"}
+                            className="w-full h-[300px] object-cover"
+                          />
                           <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white">
                             <div className="mb-2 bg-white text-black w-16 h-16 p-4 rounded-full flex items-center justify-center">
-                              <img src={item.iconUrl} alt={item.label} className="w-6 h-6" />
+                              <img
+                                src={item.iconUrl ? item.iconUrl : undefined}
+                                alt={item.label || "Icon"}
+                                className="w-6 h-6"
+                              />
                             </div>
                             <p className="text-lg font-medium tracking-wider">{item.label}</p>
                           </div>
@@ -117,14 +131,14 @@ const ModernFacilities = ({ data }) => {
 
                 <button
                   onClick={handlePrev}
-                  className="absolute top-0 right-16 transform -translate-y-1/2 z-10 text-white bg-black/50 p-2 rounded-full cursor-pointer hover:bg-black/70 transition-all"
+                  className="absolute top-0 right-16 transform -translate-y-1/2 z-10 text-black bg-white p-2 rounded-full cursor-pointer hover:bg-black/70 transition-all"
                   disabled={isAnimating}
                 >
                   <FaChevronLeft />
                 </button>
                 <button
                   onClick={handleNext}
-                  className="absolute top-0 right-4 transform -translate-y-1/2 z-10 text-white bg-black/50 p-2 rounded-full cursor-pointer hover:bg-black/70 transition-all"
+                  className="absolute top-0 right-4 transform -translate-y-1/2 z-10 text-black bg-white p-2 rounded-full cursor-pointer hover:bg-black/70 transition-all"
                   disabled={isAnimating}
                 >
                   <FaChevronRight />
@@ -144,12 +158,20 @@ const ModernFacilities = ({ data }) => {
                       }`}
                       onClick={() => handleThumbnailClick(item.originalIndex)}
                     >
-                      <img src={item.image} alt={item.label} className="w-full h-[200px] md:h-[250px] object-cover pb-16" />
-                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center text-white z-10">
+                      <img
+                        src={item.image ? item.image : undefined}
+                        alt={item.label || "Thumb"}
+                        className="w-full h-[200px] md:h-[250px] object-cover pb-16"
+                      />
+                      <div className="absolute bottom-2 left-1/2 -translate-x-1/2 flex flex-col items-center w-full text-white z-10">
                         <div className="bg-white text-black w-12 h-12 p-2.5 rounded-full flex items-center justify-center mb-3">
-                          <img src={item.iconUrl} alt={item.label} className="w-6 h-6" />
+                          <img
+                            src={item.iconUrl ? item.iconUrl : undefined}
+                            alt={item.label || "Icon"}
+                            className="w-6 h-6"
+                          />
                         </div>
-                        <p className="text-sm font-medium tracking-wide px-2 py-1 text-black">{item.label}</p>
+                        <p className="text-base font-medium tracking-wide px-2 py-1 text-black">{item.label}</p>
                       </div>
                     </div>
                   ))}
@@ -157,7 +179,7 @@ const ModernFacilities = ({ data }) => {
 
                 {isMobile && (
                   <div className="flex justify-center mt-6 gap-2">
-                    {sliderData.map((_, index) => (
+                    {slider.map((_, index) => (
                       <button
                         key={index}
                         className={`w-4 h-4 rounded-full transition-colors ${
@@ -172,34 +194,44 @@ const ModernFacilities = ({ data }) => {
             </div>
           </div>
 
-          {/* Static Video Section */}
           <div
             onClick={() => setIsModalOpen(true)}
-            className="relative cursor-pointer w-full h-[450px] overflow-hidden shadow-md lg:mt-12 mt-4"
+            className="relative cursor-pointer w-full h-[550px] overflow-hidden shadow-md lg:mt-12 mt-4"
           >
-            <img src={videoData.thumbnail} alt="Experience Video" className="w-full h-full object-cover" />
+            <img
+              src={video.thumbnail ? video.thumbnail : undefined}
+              alt="Experience Video"
+              className="w-full h-full object-cover"
+            />
             <div className="absolute inset-0 bg-black bg-opacity-30 flex flex-col justify-center items-center text-white">
-              <div className="mb-2 bg-[#966326] text-white w-16 h-16 p-4 rounded-full flex items-center justify-center hover:bg-[#7a4f1e] transition-colors">
+              <div className="mb-4 bg-[#966326] text-white w-16 h-16 p-4 rounded-full flex items-center justify-center hover:bg-[#7a4f1e] transition-colors">
                 <FaPlay className="w-6 h-6 ml-1" />
               </div>
-              <p className="text-lg font-medium tracking-wider">Walkthrough</p>
+              <p className="text-4xl font-medium tracking-wider">Walkthrough</p>
             </div>
           </div>
 
-          {/* Video Modal */}
           {isModalOpen && (
             <div
               className="fixed inset-0 bg-black bg-opacity-80 flex justify-center items-center z-50"
               onClick={() => setIsModalOpen(false)}
             >
-              <div className="relative w-full max-w-4xl mx-4 rounded-lg overflow-hidden" onClick={(e) => e.stopPropagation()}>
+              <div
+                className="relative w-full max-w-4xl mx-4 rounded-lg overflow-hidden"
+                onClick={(e) => e.stopPropagation()}
+              >
                 <button
                   className="absolute top-2 right-2 text-white text-3xl font-bold z-50 hover:text-gray-300 transition-colors"
                   onClick={() => setIsModalOpen(false)}
                 >
                   &times;
                 </button>
-                <video src={videoData.url} controls autoPlay className="w-full h-auto max-h-[80vh]" />
+                <video
+                  src={video.url ? video.url : undefined}
+                  controls
+                  autoPlay
+                  className="w-full h-auto max-h-[80vh]"
+                />
               </div>
             </div>
           )}

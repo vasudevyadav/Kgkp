@@ -17,6 +17,7 @@ const ProjectDetailsPage = () => {
   const { slug } = useParams();
   const [project, setProject] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [showContent, setShowContent] = useState(false); // For smooth transition
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -33,16 +34,20 @@ const ProjectDetailsPage = () => {
         setProject(null);
       } finally {
         setLoading(false);
+        // Wait a moment before showing content (smooth transition)
+        setTimeout(() => setShowContent(true), 300);
       }
     };
 
     fetchProject();
   }, [slug]);
 
-  if (loading) {
+  if (loading && !showContent) {
     return (
       <MainLayout title="Loading...">
-        <div className="text-center py-20">Loading project details...</div>
+        <div className="flex items-center justify-center h-[60vh] transition-opacity duration-500 opacity-100">
+          <div className="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+        </div>
       </MainLayout>
     );
   }
@@ -61,52 +66,63 @@ const ProjectDetailsPage = () => {
   }
 
   return (
-    <MainLayout title={project.name || 'Project'}>
-      <HeroSectionDetails
-        data={{
-          title: project.name,
-          background: project.image,
-          address: project.address,
-          unitInfo: project.units,
-          reraApproved: !!project.reraNo,
-        }}
-      />
-
-      <AboutDetails
-        data={{
-          breadcrumb: project.breadcrumb,
-          logo: project.logo,
-          image: project.image,
-          fullWidthImage: project.fullWidthImage,
-          brochureLink: project.brochureLink,
-          about: project.about
-        }}
-      />
-
-      {project.Construction && (
-        <ConstructionUpdate
+    <MainLayout title={project.Hero?.name || 'Project'}>
+      <div className={`transition-opacity duration-500 ${showContent ? 'opacity-100' : 'opacity-0'}`}>
+        {/* Hero Section */}
+        <HeroSectionDetails
           data={{
-            Constructiontitle: project.Construction?.Constructiontitle,
-            Constructionsubtitle: project.Construction?.Constructionsubtitle,
-            Constructiondescription: project.Construction?.Constructiondescription,
-            ConstructionbuttonText: project.Construction?.ConstructionbuttonText,
-            Constructionimage: project.Construction?.Constructionimage,
+            title: project.Hero?.name,
+            background: project.Hero?.image || undefined,
+            address: project.Hero?.address,
+            unitInfo: project.Hero?.units,
+            reraApproved: !!project.Hero?.reraNo,
           }}
         />
-      )}
 
-     {project.ModernFacilitiesSection && (
-  <ModernFacilities data={project.ModernFacilitiesSection} />)}
-    <ProjectGallery data={project.GallerySection} />
-     
-    <FloorPlan data={project.FloorPlanSection} />
-<BookVisitSite
-  data={project.BookVisitSite}
-  slug={slug}
-  projectName={project.title}
-/>
-      <ClientSpeaks />
-      <Faq />
+        {/* About Section */}
+        <AboutDetails
+          data={{
+            breadcrumb: project.About?.breadcrumb,
+            logo: project.About?.logo || undefined,
+            image: project.About?.image || undefined,
+            fullWidthImage: project.About?.fullWidthImage || false,
+            brochureLink: project.About?.brochureLink,
+            about: project.About?.about,
+          }}
+        />
+
+      <LocationExcellence data={project.LocationSection} />
+
+
+        {/* Modern Facilities */}
+        {project.ModernFacilitiesSection && (
+          <ModernFacilities data={project.ModernFacilitiesSection} />
+        )}
+
+        <ProjectGallery data={project?.GallerySection} />
+
+
+        {/* Construction Update */}
+        {project.Construction?.title && (
+          <ConstructionUpdate
+            data={{
+              Constructiontitle: project.Construction.title,
+              Constructionsubtitle: project.Construction.status || '',
+              Constructiondescription: project.Construction.description || '',
+              ConstructionbuttonText: '',
+              Constructionimage: project.Construction.image || undefined,
+            }}
+          />
+        )}
+
+        {/* Floor Plan */}
+        <FloorPlan data={project} />
+
+        {/* Static Components */}
+        <BookVisitSite />
+        <ClientSpeaks />
+        <Faq />
+      </div>
     </MainLayout>
   );
 };

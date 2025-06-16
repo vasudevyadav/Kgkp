@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { Pagination } from "swiper";
 import { Swiper, SwiperSlide } from "swiper/react";
 import axios from "axios";
-
+import { Link } from 'react-router-dom';
 import "swiper/css";
 import "swiper/css/pagination";
 
@@ -72,14 +72,17 @@ const Blogs = () => {
                   />
                   <div className="py-8 px-5 flex flex-col flex-1">
                     <div className="flex-1">
-                      <h3 className="text-md font-semibold mb-3 leading-snug">{blog.title}</h3>
-                      <p className="text-base text-gray-500">
+                      <h3 className="text-md lg:text-2xl font-semibold mb-3 leading-snug line-clamp-2">{blog.title}</h3>
+                      <p className="text-base text-gray-500 line-clamp-4">
                         {blog.excerpt || blog.description || "No description available."}
                       </p>
                     </div>
-                    <button className="mt-6 self-start border border-black text-black text-base px-8 py-2 hover:bg-black hover:text-white transition hover:border-secondary hover:bg-secondary hover:text-white">
+                    <Link
+                      to={`/blog/${blog.slug}`}
+                    className="mt-6 self-start border border-black text-black text-base px-8 py-2 hover:bg-black hover:text-white transition hover:border-secondary hover:bg-secondary hover:text-white"
+                    >
                       Read More
-                    </button>
+                    </Link>
                   </div>
                 </div>
               </div>

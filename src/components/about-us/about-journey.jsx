@@ -27,9 +27,9 @@ const journeyData = [
 
 const moralCodeData = [
   {
-    title: "Integrity in Every Deal",
-    description: "KGK Realty (INDIA) Limited is built on a foundation of trust, transparency, and tenacity. Dedicated to becoming one of the most respected names in real estate, the company embraces continuous innovation and learning to maintain excellence across all projects.  ",
-    description2: " With a commitment to ethical practices, KGK Realty invests in advanced systems, ongoing team development, and elevated service standards to ensure exceptional customer experiences. Integrity and professionalism remain at the core of the company's operations, with every team member dedicated to upholding the highest standards in the industry. ",
+    title: " Principles That Define Us ",
+    description: " KGK Realty (INDIA) Limited is built on a foundation of trust, transparency, and tenacity. Dedicated to becoming one of the most respected names in real estate, the company embraces continuous innovation and learning to maintain excellence across all projects. ",
+    description2: " With a commitment to ethical practices, KGK Realty invests in advanced systems, ongoing team development, and elevated service standards to ensure exceptional customer experiences. Integrity and professionalism remain at the core of the company’s operations, with every team member dedicated to upholding the highest standards in the industry. ",
     image: Aboutvideo,
     videoUrl: "https://www.w3schools.com/html/mov_bbb.mp4"
   },
@@ -138,16 +138,14 @@ const AboutJourney = () => {
           </div>
         </div>
 
-        <div className="bg-white relative z-10 px-8 md:px-12 w-full  mt-0 pt-48 pb-4">
+        <div className="bg-white relative z-10 px-8 md:px-12 w-full  mt-0 lg:pt-48 pt-20 pb-4">
           <div className='max-w-5xl mx-auto'>
             <div className="text-gray-700 text-sm md:text-base text-center leading-relaxed space-y-4">
               <p>
-               KGK Realty (INDIA) Limited, an extension of the century-old KGK Group, carries forward a legacy of trust, integrity, and excellence. Established in 2010, the company has emerged as a distinguished real estate developer, specializing in premium properties across industrial, residential, commercial, and hospitality sectors.
-
-              </p>
+              KGK Realty (INDIA) Limited, an extension of the century-old KGK Group, carries forward a legacy of trust, integrity, and excellence. Established in 2010, the company has emerged as a distinguished real estate developer, specializing in premium properties across industrial, residential, commercial, and hospitality sectors.
+</p>
               <p>
-              Rooted in the values of inclusivity and diversity, KGK Realty reflects the principles of its parent group while embracing innovation and sustainable growth. With a strategic vision for the future, the company remains committed to delivering high-quality developments that redefine modern living and business landscapes.
-
+             Rooted in the values of inclusivity and diversity, KGK Realty reflects the principles of its parent group while embracing innovation and sustainable growth. With a strategic vision for the future, the company remains committed to delivering high-quality developments that redefine modern living and business landscapes.
               </p>
             
             </div>
@@ -157,10 +155,10 @@ const AboutJourney = () => {
       </section>
 <section
   className="bg-white lg:pt-12 lg:pb-36 bg-contain bg-no-repeat"
-  style={{ backgroundImage: `url(${bgImage})`,backgroundPosition: '0px 440px' }}>
+  style={{ backgroundImage: `url(${bgImage})`,backgroundPosition: '0px 510px' }}>
         <div className="flex items-center mb-8 px-5 lg:px-0 lg:pl-[5.7rem] ">
           <h2 className="lg:text-4xl text-2xl text-dark mr-6">
-            Moral Code
+  Principles That Define Us
           </h2>
           <div className="h-px bg-gray-300 flex-1"></div>
         </div>
@@ -188,7 +186,7 @@ const AboutJourney = () => {
 
                 <div className="w-full lg:w-7/12 lg:mb-0 mb-5">
                   <div
-                    className="relative aspect-video lg:min-h-[400px] overflow-hidden cursor-pointer"
+                    className="relative aspect-video lg:min-h-[470px] w-full overflow-hidden cursor-pointer"
                     onClick={() => openVideoModal(item)}
                   >
                     <img

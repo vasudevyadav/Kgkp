@@ -20,7 +20,7 @@ const ConstructionUpdate = ({ data }) => {
          PROGRESS THAT REFLECTS PRECISION
 
           </p>
-          <div className="flex items-center mb-4">
+          <div className="flex items-center lg:mb-4 mb-12">
             <h2 className="lg:text-4xl text-2xl text-black lg:mr-[6rem] mr-[1rem]">{Constructiontitle}</h2>
             <div className="h-px bg-customGray1 flex-1"></div>
           </div>
@@ -44,7 +44,7 @@ const ConstructionUpdate = ({ data }) => {
               <img
                 src={Constructionimage}
                 alt="Construction update"
-                className="w-full h-[450px] object-cover lg:pr-10 pr-4"
+                className="w-full lg:h-[450px] object-cover lg:pr-10 pr-4"
               />
             </div>
           </div>

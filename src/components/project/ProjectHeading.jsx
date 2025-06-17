@@ -94,7 +94,7 @@ const ProjectHeading = ({ variant }) => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mx-auto lg:px-10 px-4 items-center">
         {/* Map Section */}
-        <div className="rounded-2xl overflow-hidden h-[480px] border border-gray-200">
+        <div className="rounded-2xl overflow-hidden h-[480px] border border-gray-200 z-10">
           {selectedProject ? (
             <MapContainer
               center={getCoordinates(selectedProject)}

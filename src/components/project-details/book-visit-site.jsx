@@ -68,7 +68,7 @@ const BookVisitSite = ({ data, slug, projectName }) => {
       </div>
 
       {/* Right Form */}
-      <div className="w-full md:w-1/2 bg-[#666666] text-white flex items-center justify-center py-6 md:py-12 px-6 md:px-16 sm:!pr-40 pr-6">
+      <div className="w-full md:w-1/2 bg-[#666666] text-white flex items-center justify-center py-6 md:py-16 px-6 md:px-16 sm:!pr-40 pr-6">
         <form className="w-full" onSubmit={handleSubmit}>
           <h2 className="text-2xl md:text-4xl lg:font-bold lg:mb-10 mb-4">
             {data?.title || "Book A Site Visit"}
@@ -77,7 +77,7 @@ const BookVisitSite = ({ data, slug, projectName }) => {
             {data?.subtitle || "Enter Your Details To Get Callback"}
           </p>
 
-          <div className="mb-8">
+          <div className="mb-10">
             <input
               id="name"
               type="text"
@@ -89,7 +89,7 @@ const BookVisitSite = ({ data, slug, projectName }) => {
             />
           </div>
 
-          <div className="mb-8">
+          <div className="mb-10">
             <label className="text-xs block mb-1" htmlFor="email">
               EMAIL*
             </label>
@@ -104,7 +104,7 @@ const BookVisitSite = ({ data, slug, projectName }) => {
             />
           </div>
 
-          <div className="flex gap-8 mb-10">
+          <div className="flex gap-8 mb-12">
             <div className="w-1/2 relative">
 
               <input
@@ -133,7 +133,7 @@ const BookVisitSite = ({ data, slug, projectName }) => {
 
           <button
             type="submit"
-            className="w-full bg-white text-black py-3 font-semibold tracking-wide"
+            className="w-full bg-white text-black py-3 text-base font-semibold tracking-wide"
           >
             SUBMIT
           </button>

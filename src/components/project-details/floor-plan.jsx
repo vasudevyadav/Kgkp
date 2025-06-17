@@ -32,13 +32,14 @@ const FloorPlan = ({ data }) => {
             <img
               src={plan.image}
               alt={plan.title}
-              className="w-full h-auto transition-transform duration-300 group-hover:scale-105"
+              className="w-full h-[280px] object-contain transition-transform duration-300 group-hover:scale-105"
             />
             <div className="absolute inset-0 bg-white bg-opacity-80 flex flex-col items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
               <div className="text-3xl font-light text-black mb-2 bg-[#b8966b] w-10 h-10 rounded-full flex justify-center items-center">+</div>
               <div className="text-xs uppercase text-black tracking-widest">Click to view</div>
             </div>
           </div>
+
           <div className="mt-4">
             <h3 className="text-base font-bold mb-1">{plan.title}</h3>
             <p className="text-sm  font-medium text-gray-700 mb-1">{plan.size}</p>
@@ -50,7 +51,7 @@ const FloorPlan = ({ data }) => {
   );
 
   return (
-    <section className="w-full lg:py-14 py-8 bg-white">
+    <section className="w-full lg:py-16 py-8 bg-white">
       <div className="mx-auto">
         <div className="text-center mb-16">
           <p className="text-amber-700 uppercase text-base tracking-widest mb-8 bg-white inline-block px-10 py-2">
@@ -68,13 +69,13 @@ const FloorPlan = ({ data }) => {
           <div className="flex justify-center gap-4 mb-12">
             <button
               onClick={() => setActiveTab('master')}
-              className={`border px-8 py-3 text-base ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
+              className={`border lg:px-8 px-6 py-3 lg:text-base ${activeTab === 'master' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
             >
               MASTER PLAN
             </button>
             <button
               onClick={() => setActiveTab('unit')}
-              className={`border px-8 py-3 text-sm ${activeTab === 'unit' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
+              className={`border lg:px-8 px-6 py-3 lg:text-base ${activeTab === 'unit' ? 'bg-[#77787a] text-white' : 'border-black text-black'}`}
             >
               UNIT PLAN
             </button>

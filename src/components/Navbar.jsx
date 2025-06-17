@@ -94,7 +94,7 @@ const Navbar = () => {
             {mainMenu.map((item) =>
               item.dropdown ? (
                 <div key={item.id} className="relative group">
-                  <button className="text-white px-3 pt-1 border-b-2 border-transparent hover:border-secondary flex items-center gap-1">
+                  <button className="text-white px-3 pt-1 border-b-2 border-transparent hover:border-white flex items-center gap-1">
                     {item.label} <ChevronDown size={18} />
                   </button>
                   <div className="absolute top-[26px] px-3 py-3 left-0 mt-2 w-48 bg-black/95 backdrop-blur-md shadow-lg rounded-md hidden group-hover:block">
@@ -104,7 +104,7 @@ const Navbar = () => {
                         to={sub.url}
                         className={`block px-4 py-2 text-sm rounded mb-1 ${isActive(sub.id)
                             ? 'text-secondary bg-secondary/20'
-                            : 'text-white hover:bg-secondary/30'
+                            : 'text-white hover:bg-white/30'
                           }`}
                       >
                         {sub.label}
@@ -117,8 +117,8 @@ const Navbar = () => {
                   key={item.id}
                   href={item.url}
                   className={`px-3 pt-1 border-b-2 ${isActive(item.id)
-                      ? 'text-secondary border-secondary'
-                      : 'border-transparent hover:border-secondary text-white'
+                      ? 'text-secondary border-white'
+                      : 'border-transparent hover:border-white text-white'
                     }`}
                 >
                   {item.label}
@@ -161,7 +161,7 @@ const Navbar = () => {
               <React.Fragment key={item.id}>
                 <button
                   onClick={() => setProjectOpen(!projectOpen)}
-                  className="w-full text-left px-5 py-2 border-b border-secondary flex justify-between items-center"
+                  className="w-full text-left px-5 py-2 border-b border-white flex justify-between items-center"
                 >
                   {item.label}
                   <ChevronDown
@@ -171,7 +171,7 @@ const Navbar = () => {
                   />
                 </button>
                 <div
-                  className={`pl-4 flex flex-col space-y-1 overflow-hidden transition-all duration-500 ease-in-out ${projectOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
+                  className={`flex flex-col space-y-3 overflow-hidden transition-all duration-500 ease-in-out ${projectOpen ? 'max-h-40 opacity-100' : 'max-h-0 opacity-0'
                     }`}
                   style={{ transitionProperty: 'max-height, opacity' }}
                 >
@@ -180,7 +180,7 @@ const Navbar = () => {
                       key={sub.id}
                       to={sub.url}
                       onClick={() => setIsOpen(false)}
-                      className={`py-1 ${isActive(sub.id) ? 'text-secondary' : 'text-white'
+                      className={`py-2 pl-4 border-b border-white ${isActive(sub.id) ? 'text-secondary' : 'text-white'
                         } transition-opacity duration-300`}
                     >
                       {sub.label}
@@ -194,8 +194,8 @@ const Navbar = () => {
                 href={item.url}
                 onClick={() => setIsOpen(false)}
                 className={`block px-2 py-2 border-b px-5 ${isActive(item.id)
-                    ? 'border-secondary text-secondary'
-                    : 'border-secondary text-white'
+                    ? 'border-white text-secondary'
+                    : 'border-white text-white'
                   }`}
               >
                 {item.label}

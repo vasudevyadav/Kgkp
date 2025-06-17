@@ -83,7 +83,7 @@ const ProjectGallery = ({ data }) => {
                 {images[0] && (
                   <div
                     onClick={() => openModal(0)}
-                    className="col-span-8 h-[220px] md:h-[450px] rounded-md overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow"
+                    className="col-span-8 h-[220px] md:h-[500px] overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow"
                   >
                     <img
                       src={images[0].thumbUrl}
@@ -95,7 +95,7 @@ const ProjectGallery = ({ data }) => {
                 {images[1] && (
                   <div
                     onClick={() => openModal(1)}
-                    className="col-span-4 h-[220px] md:h-[450px] rounded-md overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow"
+                    className="col-span-4 h-[220px] md:h-[500px] overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow"
                   >
                     <img
                       src={images[1].thumbUrl}
@@ -106,7 +106,7 @@ const ProjectGallery = ({ data }) => {
                 )}
               </div>
 
-              <div className="grid grid-cols-3 gap-4 h-[250px] md:h-[450px]">
+              <div className="grid grid-cols-3 gap-4 h-[250px] md:h-[500px]">
                 {[2, 3, 4, 5].map(
                   (index) =>
                     images[index] && (
@@ -119,7 +119,7 @@ const ProjectGallery = ({ data }) => {
                             : index === 3
                             ? "row-span-1"
                             : "row-start-2 col-start-2"
-                        } rounded-md overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow`}
+                        }  overflow-hidden block cursor-pointer hover:shadow-lg transition-shadow`}
                       >
                         <img
                           src={images[index].thumbUrl}
@@ -208,8 +208,8 @@ const ProjectGallery = ({ data }) => {
             </div>
           </div>
 
-          <div className="text-center mt-10">
-            <button className="border border-black text-sm px-6 py-2 hover:bg-black hover:text-white transition-colors duration-300 font-medium tracking-wide">
+          <div className="text-center lg:mt-20 mt-10">
+            <button className="border border-black text-lg px-8 py-3 hover:bg-black hover:text-white transition-colors duration-300 font-medium tracking-wide">
               BOOK A SITE VISIT
             </button>
           </div>

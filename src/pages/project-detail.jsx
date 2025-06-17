@@ -72,7 +72,7 @@ const ProjectDetailsPage = () => {
         <HeroSectionDetails
           data={{
             title: project.Hero?.name,
-            background: project.Hero?.image || undefined,
+background: project.Hero?.banner_image || undefined,
             address: project.Hero?.address,
             unitInfo: project.Hero?.units,
             reraApproved: !!project.Hero?.reraNo,

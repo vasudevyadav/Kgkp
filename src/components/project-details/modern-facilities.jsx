@@ -92,12 +92,12 @@ const ModernFacilities = ({ data }) => {
               <p className="text-base text-[#333] leading-relaxed mb-8 mt-6">
                 {description}
               </p>
-              <button className="bg-[#B38F5F] text-white px-6 py-3 font-medium tracking-wider hover:bg-[#a07b4a] transition-all">
+              <button className=" bg-[#996633] text-white px-8 py-3 font-medium tracking-wider hover:bg-[#a07b4a] transition-all">
                 EXPERIENCE ALL LIFESTYLE
               </button>
             </div>
 
-            <div className="lg:w-[60%] flex flex-col gap-6">
+            <div className="lg:w-[60%] flex flex-col gap-6 mb-8 lg:mb-0">
               {/* Main Slider */}
               <div className="relative w-full pt-10">
                 <div className="relative overflow-hidden">
@@ -194,9 +194,12 @@ const ModernFacilities = ({ data }) => {
             </div>
           </div>
 
-          <div
+        
+        </div>
+      </div>
+        <div
             onClick={() => setIsModalOpen(true)}
-            className="relative cursor-pointer w-full h-[550px] overflow-hidden shadow-md lg:mt-12 mt-4"
+            className="relative cursor-pointer w-full h-[550px] overflow-hidden shadow-md  mt-0"
           >
             <img
               src={video.thumbnail ? video.thumbnail : undefined}
@@ -235,8 +238,6 @@ const ModernFacilities = ({ data }) => {
               </div>
             </div>
           )}
-        </div>
-      </div>
     </section>
   );
 };

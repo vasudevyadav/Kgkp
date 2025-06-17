@@ -58,7 +58,7 @@ const BlogContact = ({ data }) => {
 
       <div className="w-full bg-[#666666] text-white flex items-center justify-center py-4 md:py-8 px-6 md:px-8 pr-6">
         <form className="w-full max-w-lg mx-auto" onSubmit={handleSubmit}>
-          <h2 className="text-2xl text-center font-bold mb-2">Book A Site Visit</h2>
+          <h2 className="text-3xl text-center font-bold mb-2">Book A Site Visit</h2>
           <p className="text-sm mb-8 text-center">Enter Your Details To Get Callback</p>
 
           <div className="mb-8">
@@ -111,7 +111,7 @@ const BlogContact = ({ data }) => {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="bg-white text-black py-2.5 px-10 mx-auto flex justify-center font-semibold tracking-wide"
+            className="bg-white text-black py-3 px-10 mx-auto flex justify-center font-semibold tracking-wide"
           >
             {isSubmitting ? "Submitting..." : "SUBMIT"}
           </button>

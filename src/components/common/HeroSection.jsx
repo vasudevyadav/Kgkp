@@ -18,7 +18,7 @@ const HeroSection = ({ title, background, breadcrumbs }) => {
 
   return (
     <section
-      className="hero-section relative sm:h-[65vh] h-[45vh] mb-0 lg:mb-0 bg-cover bg-top bg-no-repeat flex items-center justify-center"
+      className="hero-section relative sm:h-[75vh] h-[45vh] mb-0 lg:mb-0 bg-cover bg-top bg-no-repeat flex items-center justify-center"
       style={{
         backgroundImage: `url(${background || CommonImage})`,
       }}
